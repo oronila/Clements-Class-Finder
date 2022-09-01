@@ -11,7 +11,7 @@
 
 <style>
 	aside {
-		left: -100%;
+		left: -30%;
 		transition: left 0.3s ease-in-out
 	}
 	
