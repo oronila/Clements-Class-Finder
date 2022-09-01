@@ -16,6 +16,6 @@
 	}
 	
 	.open {
-		left: 30
+		left: -30
 	}
 </style>
