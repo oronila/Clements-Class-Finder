@@ -8,9 +8,9 @@
 
 <header class="flex justify-between bg-blue-200 p-2 items-center text-black-600 border-b-2">
 	<nav class="flex">
-		<Hamburger bind:open={sidebar}/>
 		<Logo/>	
 	</nav>
 	
-	<Menu/>
+	<!-- <Menu/> -->
+	<Hamburger bind:open={sidebar}/>
 </header>
