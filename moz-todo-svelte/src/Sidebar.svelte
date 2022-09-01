@@ -11,11 +11,11 @@
 
 <style>
 	aside {
-		left: -30%;
+		left: -100%;
 		transition: left 0.3s ease-in-out
 	}
 	
 	.open {
-		left: 0
+		left: 30
 	}
 </style>
