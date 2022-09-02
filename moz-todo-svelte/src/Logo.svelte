@@ -7,7 +7,6 @@
 	
 	text {
 		font-family: 'Roboto', sans-serif;
-		font-weight: bold;
 		fill: currentColor;
 	}
 </style>
