@@ -31,4 +31,11 @@
 		text-align: right;
 		padding: 5%;
 	}
+	a {
+		color: black;
+	}
+	a:hover{
+		color: rgb(43,108,176);
+		text-decoration: none;
+	}
 </style>
