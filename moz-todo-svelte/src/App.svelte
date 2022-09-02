@@ -9,7 +9,7 @@
 
 
 <Sidebar bind:open/>
-<Navbar bind:sidebar={open}/>
+<Navbar bind:sidebar={open}/>	
 <Main/>
 
 <svelte:head>
@@ -19,6 +19,7 @@
 <style>
 	:global(body) {
 		padding: 0;
+		overflow-x: hidden;
 	}
 </style>
 
