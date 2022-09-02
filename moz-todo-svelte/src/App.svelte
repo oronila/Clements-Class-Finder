@@ -1,9 +1,17 @@
 <script>
+	import {page_shown} from "./data"
+	
 	import Navbar from './Navbar.svelte'
 	import Sidebar from './Sidebar.svelte'
 	import Main from './Main.svelte'
-	
+	import AboutUs from './About.svelte'
 
+	history.replaceState({"href_to_show":"/"}, "", "/")
+
+	window.addEventListener("popstate", e => {
+		console.log(e.state.href_to_show)
+		$page_shown = e.state.href_to_show
+	})
 	let open = false
 </script>
 
@@ -11,6 +19,12 @@
 <Sidebar bind:open/>
 <Navbar bind:sidebar={open}/>	
 <Main/>
+
+
+{#if $page_shown == "about"}
+	<AboutUs />
+{/if}
+
 
 <svelte:head>
 	<link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet"/>
