@@ -11,11 +11,16 @@
 
 <style>
 	aside {
-		left: -100%;
-		transition: left 0.3s ease-in-out
+		right: -100%;
+		transition: right 0.3s ease-in-out;
 	}
 	
 	.open {
-		left: 0
+		right: 0;
+	}
+
+	nav {
+		text-align: right;
+		padding: 5%;
 	}
 </style>
