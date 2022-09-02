@@ -4,5 +4,5 @@
 
 <main>
     <h1>About us</h1>
-    <p>Rico is pretty useless</p>
+    <p>This site is designed by Diego Rico and Noor Ali.</p>
 </main>
