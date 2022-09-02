@@ -3,6 +3,6 @@
 </script>
 
 <main>
-    About us
-    Rico is pretty useless
+    <h1>About us</h1>
+    <p>Rico is pretty useless</p>
 </main>
