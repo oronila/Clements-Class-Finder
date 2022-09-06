@@ -14,5 +14,6 @@
     body {
         width: auto;
         height: 100%;
+        bottom:40px;
     }
 </style>
