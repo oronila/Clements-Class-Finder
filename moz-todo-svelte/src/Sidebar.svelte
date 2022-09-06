@@ -14,7 +14,7 @@
 <aside class="absolute w-full h-full bg-blue-200 border-r-2 shadow-lg" class:open>
 	<nav class="p-12 text-xl">
 		<a class="block" href="about" on:click|preventDefault={show_page} class:open on:click={() => open = !open}>About</a>
-		<a class="block" href="contact" on:click|preventDefault={show_page}>Contact</a>
+		<a class="block" href="contact" on:click|preventDefault={show_page} class:open on:click={() => open = !open}>Contact</a>
 	</nav>
 </aside>
 
