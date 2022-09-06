@@ -40,7 +40,7 @@
 <style>
 	:global(body) {
 		padding: 0;
-		overflow-x: hidden;
+		overflow: hidden;
 	}
 </style>
 

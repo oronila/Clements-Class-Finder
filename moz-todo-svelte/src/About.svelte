@@ -9,7 +9,6 @@
 <style>
     * {
         background-color: rgb(190,227,248);
-        overflow-y: hidden;
     }
     body {
         width: auto;
