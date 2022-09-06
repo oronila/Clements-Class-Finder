@@ -5,6 +5,7 @@
 	import Sidebar from './Sidebar.svelte'
 	import Main from './Main.svelte'
 	import AboutUs from './About.svelte'
+	import ContactUs from './Contact.svelte'
 
 	history.replaceState({"href_to_show":"/"}, "", "/")
 
@@ -13,6 +14,12 @@
 		$page_shown = e.state.href_to_show
 	})
 	let open = false
+
+	window.onload = function () {
+		if(window.location == "/about"){
+			window.location = "/";
+		}
+	}
 </script>
 
 
