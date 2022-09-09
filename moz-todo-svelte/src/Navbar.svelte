@@ -12,3 +12,8 @@
 	
 	<Hamburger bind:open={sidebar}/>
 </header>
+
+
+<style>
+	
+</style>

@@ -11,8 +11,9 @@
 
 </script>
 
-<aside class="absolute w-full h-full bg-blue-200 border-r-2 shadow-lg" class:open>
+<aside class="absolute w-full h-full border-r-2 shadow-lg" class:open>
 	<nav class="p-12 text-xl">
+		<!--<div class="vertical"></div> -->
 		<a class="block" href="about" on:click|preventDefault={show_page} class:open on:click={() => open = !open}>About</a>
 		<a class="block" href="contact" on:click|preventDefault={show_page} class:open on:click={() => open = !open}>Contact</a>
 	</nav>
@@ -20,9 +21,20 @@
 
 <style>
 	aside {
+		border-color: black;
+		background-color: rgb(190,227,248);	
 		right: -100%;
 		transition: right 0.3s ease-in-out;
 	}
+	/*
+	.vertical {
+            border-left: 5px solid black;
+			bottom: 35px;
+            height: 90%;
+			
+			position: absolute;
+    }
+	*/
 	.open {
 		right: 0;
 	}

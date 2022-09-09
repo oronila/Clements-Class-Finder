@@ -6,6 +6,7 @@
 	import Main from './Main.svelte'
 	import AboutUs from './About.svelte'
 	import ContactUs from './Contact.svelte'
+	import './test.js'
 
 	history.replaceState({"href_to_show":"/"}, "", "/")
 
