@@ -1,3 +1,4 @@
+
 class Graph {
     // defining vertex array and
     // adjacent list
@@ -17,6 +18,58 @@ class Graph {
         this.AdjList.get(v).push(w);
         this.AdjList.get(w).push(v);
     }
+    addEdge(v, w, w2){
+        this.AdjList.get(v).push(w);
+        this.AdjList.get(w).push(v);
+        this.AdjList.get(v).push(w2);
+        this.AdjList.get(w2).push(v);
+    }
+    addEdge(v, w, w2, w3){
+        this.AdjList.get(v).push(w);
+        this.AdjList.get(w).push(v);
+        this.AdjList.get(v).push(w2);
+        this.AdjList.get(w2).push(v);
+        this.AdjList.get(v).push(w3);
+        this.AdjList.get(w3).push(v);
+    }
+    addEdge(v, w, w2, w3, w4){
+        this.AdjList.get(v).push(w);
+        this.AdjList.get(w).push(v);
+        this.AdjList.get(v).push(w2);
+        this.AdjList.get(w2).push(v);
+        this.AdjList.get(v).push(w3);
+        this.AdjList.get(w3).push(v);
+        this.AdjList.get(v).push(w4);
+        this.AdjList.get(w4).push(v);
+    }
+    addEdge(v, w, w2, w3, w4, w5){
+        this.AdjList.get(v).push(w);
+        this.AdjList.get(w).push(v);
+        this.AdjList.get(v).push(w2);
+        this.AdjList.get(w2).push(v);
+        this.AdjList.get(v).push(w3);
+        this.AdjList.get(w3).push(v);
+        this.AdjList.get(v).push(w4);
+        this.AdjList.get(w4).push(v);
+        this.AdjList.get(v).push(w5);
+        this.AdjList.get(w5).push(v);
+    }
+    addEdge(v, w, w2, w3, w4, w5, w6){
+        this.AdjList.get(v).push(w);
+        this.AdjList.get(w).push(v);
+        this.AdjList.get(v).push(w2);
+        this.AdjList.get(w2).push(v);
+        this.AdjList.get(v).push(w3);
+        this.AdjList.get(w3).push(v);
+        this.AdjList.get(v).push(w4);
+        this.AdjList.get(w4).push(v);
+        this.AdjList.get(v).push(w5);
+        this.AdjList.get(w5).push(v);
+        this.AdjList.get(v).push(w6);
+        this.AdjList.get(w6).push(v);
+    }
+
+
     printGraph(){
         // get all the vertices
         var get_keys = this.AdjList.keys();
@@ -83,56 +136,28 @@ for (var i = 0; i < stairwellVertices.length; i++){
 // ADDING EDGES
 //
 
-g.addEdge('H1','Attendance Office')
-g.addEdge('H1','C1')
-g.addEdge('H2','1327')
-g.addEdge('H2','1325')
-g.addEdge('H2','1326')
-g.addEdge('H2','1325')
-g.addEdge('H2','H3')
-g.addEdge('H3','1323')
-g.addEdge('H3','1322')
-g.addEdge('H3','1320')
-g.addEdge('H3','B1')
-g.addEdge('H3','C3')
-g.addEdge('H4','C1')
-g.addEdge('H4','Clinic')
-g.addEdge('H4','C2')
-g.addEdge('H5','C3')
-g.addEdge('H5','C4')
-g.addEdge('H6','C4')
-g.addEdge('H6','1311')
-g.addEdge('H6','1313')
-g.addEdge('H6','1312')
-g.addEdge('H6','H7')
-g.addEdge('H7','1315')
-g.addEdge('H7','1317')
-g.addEdge('H7','1316')
-g.addEdge('H7','1314')
-g.addEdge('H7','C2')
-g.addEdge('H8','C6')
-g.addEdge('H8','Faculty Lounge')
-g.addEdge('H8','C5')
-g.addEdge('H9','C6')
-g.addEdge('H9','1520')
-g.addEdge('H9','1521')
-g.addEdge('H9','H10')
-g.addEdge('H10','1522')
-g.addEdge('H10','ARD')
-g.addEdge('H10','C8')
-g.addEdge('H11','C5')
-g.addEdge('H11','1510')
-g.addEdge('H11','1512')
-g.addEdge('H11','H12')
-g.addEdge('H12','1513')
-g.addEdge('H12','1515')
-g.addEdge('H12','1514')
-g.addEdge('H12','C7')
-g.addEdge('H13','C8')
-g.addEdge('H13','C7')
-g.addEdge('H14','C7')
-g.addEdge('H14','Commons')
-g.addEdge('H14','H26')
+g.addEdge('H1','Attendance Office','C1')
+g.addEdge('H2','1327','1325','1326','1325','H3')
+g.addEdge('H3','1323','1322','1320','B1','C3')
+g.addEdge('H4','C1','Clinic','C2')
+g.addEdge('H5','C3','C4')
+g.addEdge('H6','C4','1311','1313','1312','H7')
+g.addEdge('H7','1315','1317','1316','1314','C2')
+g.addEdge('H8','C6','Faculty Lounge','C5')
+g.addEdge('H9','C6','1520','1521','H10')
+g.addEdge('H10','1522','ARD','C8')
+g.addEdge('H11','C5','1510','1512','H12')
+g.addEdge('H12','1513','1515','1514','C7')
+g.addEdge('H13','C8','C7')
+g.addEdge('H14','C7','Commons','H26')
+g.addEdge('H15','Counselor Office','C5','Commons','C9')
+g.addEdge('H16','C3','Library','C11')
+g.addEdge('H17','C11','B2','1135','1136','1134','H18')
+g.addEdge('H18','1133','1131','1132','1130','C12')
+g.addEdge('H19','C13','1116','1115')
+
+
+
 
 
 /* Special Use Room Edges
