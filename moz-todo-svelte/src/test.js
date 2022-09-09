@@ -154,7 +154,10 @@ g.addEdge('H15','Counselor Office','C5','Commons','C9')
 g.addEdge('H16','C3','Library','C11')
 g.addEdge('H17','C11','B2','1135','1136','1134','H18')
 g.addEdge('H18','1133','1131','1132','1130','C12')
-g.addEdge('H19','C13','1116','1115')
+g.addEdge('H19','C12','C13','1116','1115')
+g.addEdge('H20','C13','1120','1121','1123','H21')
+g.addEdge('H21','C10','1127','1125','1126')
+g.addEdge('H22','C10','C11')
 
 
 
