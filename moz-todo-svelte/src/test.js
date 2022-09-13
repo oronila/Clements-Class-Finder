@@ -184,25 +184,5 @@ g.addEdge2('C14','English Workroom','C13')
 g.addEdge('C17','1101')
 
 
-
-/* Special Use Room Edges
-
-g.addEdge('Attendance Office', 'H1')
-g.addEdge('Clinic', 'H4')
-g.addEdge('Girls Gym','C6')
-g.addEdge('Boys Gym','C8')
-g.addEdge('Faculty Lounge','H8')
-g.addEdge('Library','H16')
-g.addEdge('English Workroom','C14')
-g.addEdge('Front Office','C14')
-g.addEdge('Counselor Office','H15')
-g.addEdge('B1','H3')
-g.addEdge('B2','H17')
-g.addEdge('Commons','')
-*/
-
-
-
-
 // Print the graph
 g.printGraph();
