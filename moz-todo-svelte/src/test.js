@@ -300,7 +300,7 @@ g.addEdge3('H52','2824','2822','H53')
 g.addEdge5('H53','2826','2828','C32','2815','2814')
 g.addEdge3('H54','2816','C33','2815')
 g.addEdge4('H55','C33','2814','S4','C29')
-g.addEdge3('H56','C34','C33')
+g.addEdge2('H56','C34','C33')
 g.addEdge6('H57','2513','2515','2514','2516','C34','H58')
 g.addEdge4('H58','2511','2510','2512','C22')
 g.addEdge3('H59','C35','C34','2529')
@@ -324,5 +324,5 @@ g.addEdge('C17', '1101')
 // Print the graph
 g.printGraph();
 
-console.log("BFS")
-g.bfs('C10')
+//console.log("BFS")
+//g.bfs('C10')
