@@ -178,25 +178,23 @@ class Graph {
 
 
 var g = new Graph(1000);
-//
-// SPECIAL USE ROOMS
-//
+// *****************************
+// *       FIRST FLOOR         *
+// *****************************
+
+// Special Use Rooms
 var specialUseVertices = ['Attendance Office', 'Clinic', 'Girls Gym', 'Boys Gym', 'Faculty Lounge', 'Library', 'English Workroom', 'Front Office', 'Counselor Office', 'B1', 'B2', 'B3', 'Commons', 'Courtyard', 'ARD', 'Registrar'];
 for (var i = 0; i < specialUseVertices.length; i++) {
     g.addVertex(specialUseVertices[i]);
 }
 
-//
-// CLASSROOMS
-//
+// Classrooms
 var classroomVertices = ['1327', '1325', '1326', '1324', '1323', '1322', '1320', '1317', '1315', '1316', '1314', '1313', '1311', '1312', '1520', '1521', '1522', '1510', '1512', '1513', '1515', '1514', '1127', '1125', '1123', '1121', '1120', '1126', '1101', '1111', '1115', '1116', '1117', '1130', '1118', '1131', '1132', '1133', '1134', '1136', '1135', '1601', '1602', '1603', '1604', '1605', '1606', '1801', '1802', '1803', '1804', '1805', '1808']
 for (var i = 0; i < classroomVertices.length; i++) {
     g.addVertex(classroomVertices[i])
 }
 
-//
-// HALLWAYS, CORNERS, AND STAIRWELLS
-//
+// Hallways, Corners, and Stairwells
 var hallwayVertices = ['H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'H7', 'H8', 'H9', 'H10', 'H11', 'H12', 'H13', 'H14', 'H15', 'H16', 'H17', 'H18', 'H19', 'H20', 'H21', 'H22', 'H23', 'H24', 'H25', 'H26', 'H27', 'H28', 'H29', 'H30', 'H31', 'H32', 'H33', 'H34']
 for (var i = 0; i < hallwayVertices.length; i++) {
     g.addVertex(hallwayVertices[i])
@@ -207,15 +205,43 @@ for (var i = 0; i < cornerVertices.length; i++) {
     g.addVertex(cornerVertices[i])
 }
 
-var stairwellVertices = ['S1', 'S2', 'S3', 'S4', 'S5', 'S6', 'S7', 'S8']
+var stairwellVertices = ['S1', 'S2', 'S3', 'S4', 'S5', 'S6', 'S7', 'S8','S9','S10','S11','S12']
 for (var i = 0; i < stairwellVertices.length; i++) {
     g.addVertex(stairwellVertices[i])
 }
 
-//
-// ADDING EDGES
-//
+// *****************************
+// *      SECOND FLOOR         *
+// *****************************
 
+// Special Use Rooms
+var specialUseVertices2 = ['Math Office','Science Workroom','Book Room','B4']
+for (var i = 0; i < specialUseVertices2.length; i++) {
+    g.addVertex(specialUseVertices2[i]);
+}
+
+// Classrooms
+var classroomVertices2 = ['2327','2325','2323','2326','2324','2322','2320','2331','2330','2317','2315','2316','2314','2313','2311','2312','2310','2412','2521','2413','2518','2517','2519','2525','2527','2531','2529','2513','2515','2516','2514','2512','2510','2511','2218','2216','2214','2220','2136','2132','2131','2130','2120','2122','2125','2123','2108','2107','2103','2102','2101','2012','2003','2011','2001','2010','2007','2008','2801','2802','2803','2810','2812','2820','2822','2824','2826','2828','2814','2815','2830','2816']
+for (var i = 0; i < classroomVertices2.length; i++) {
+    g.addVertex(classroomVertices2[i]);
+}
+
+// Hallways, Corners, and Stairwells
+var hallwayVertices2 = ['H35','H36','H37','H38','H39','H40','H41','H42','H43','H44','H45','H46','H47','H48','H49','H50','H51','H52','H53','H54','H55','H56','H57','H58','H59','H60','H61','H62','H63']
+for (var i = 0; i < hallwayVertices2.length; i++) {
+    g.addVertex(hallwayVertices2[i])
+}
+
+var cornerVertices2 = ['C18','C19','C20','C21','C22','C23','C24','C25','C26','C27','C28','C29','C30','C31','C32','C33','C34','C35','C36']
+for (var i = 0; i < cornerVertices2.length; i++) {
+    g.addVertex(cornerVertices2[i])
+}
+
+// *****************************
+// *      ADDING EDGES         *
+// *****************************
+
+// First Floor Edges
 g.addEdge2('H1', 'Attendance Office', 'C1')
 g.addEdge6('H2', '1327', '1325', '1326', '1325', '1324', 'C1')
 g.addEdge6('H3', '1323', '1322', '1320', 'B1', 'C3', 'H2')
@@ -251,6 +277,38 @@ g.addEdge3('H32', '1602', '1601', 'H34')
 g.addEdge3('H33', '1605', '1606', '1604')
 g.addEdge2('H34', 'C7', 'S6')
 
+//Second Floor Edges
+g.addEdge4('H35','C18','2331','2330','C19')
+g.addEdge6('H36','C18','2327','2325','2326','2324','H37')
+g.addEdge5('H37','2323','2322','B4','2320','C20')
+g.addEdge6('H38','C19','2317','2315','2316','2314','H39')
+g.addEdge5('H39','2313','2311','2312','2310','C21')
+g.addEdge3('H40','C20','2220','C23')
+g.addEdge3('H41','2136','C23','C26')
+g.addEdge5('H42','C23','2132','2131','2130','C24')
+g.addEdge4('H43','C24','2125','2123','C25')
+g.addEdge4('H44','C26','2120','2122','C25')
+g.addEdge2('H45','C25','C27')
+g.addEdge5('H46','C27','2102','2101','2103','H47')
+g.addEdge3('H47','2108','2107','C28')
+g.addEdge2('H48','C24','C28')
+g.addEdge6('H49','C25','2012','2003','2011','2001','2010')
+g.addEdge3('H49','2007','2008','C29')
+g.addEdge3('H50','C29','2801','C30')
+g.addEdge5('H51','2812','2810','2820','C31','H52')
+g.addEdge3('H52','2824','2822','H53')
+g.addEdge5('H53','2826','2828','C32','2815','2814')
+g.addEdge3('H54','2816','C33','2815')
+g.addEdge4('H55','C33','2814','S4','C29')
+g.addEdge3('H56','C34','C33')
+g.addEdge6('H57','2513','2515','2514','2516','C34','H58')
+g.addEdge4('H58','2511','2510','2512','C22')
+g.addEdge3('H59','C35','C34','2529')
+g.addEdge4('H60','C35','2525','2527','H61')
+g.addEdge4('H61','2413','2521','2412','C36')
+g.addEdge4('H62','C36','2518','2517','C22')
+g.addEdge5('H63','C22','2218','2216','2214','C26')
+
 g.addEdge('C2', 'C6')
 g.addEdge('C3', 'S1')
 g.addEdge('C4', 'C5')
@@ -262,7 +320,6 @@ g.addEdge2('C12', '1117', '1118')
 g.addEdge('C16', '1111')
 g.addEdge2('C14', 'English Workroom', 'C13')
 g.addEdge('C17', '1101')
-
 
 // Print the graph
 g.printGraph();
