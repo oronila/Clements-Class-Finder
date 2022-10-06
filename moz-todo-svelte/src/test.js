@@ -19,6 +19,15 @@ class Queue {
             return "Underflow";
         return this.items.shift();
     }
+    // front()
+    dequeue() {
+        // removing element from the queue
+        // returns underflow when called 
+        // on empty queue
+        if (this.isEmpty())
+            return "Underflow";
+        return this.items.shift();
+    }
 
     // isEmpty()
     isEmpty() {
@@ -33,8 +42,6 @@ class Queue {
         return str;
     }
 }
-
-
 
 
 
@@ -166,39 +173,6 @@ class Graph {
         }
     }
     // dfs(v)
-    findPathWithDijkstra(startNode, endNode){
-        let times = {};
-        let backtrace = {};
-        let pq = new Queue();
-        times[startNode] = 0;
-      
-        this.nodes.forEach(node => {
-            if (node !== startNode) {
-                times[node] = Infinity
-            }
-        });
-        pq.enqueue([startNode, 0]);
-        while (!pq.isEmpty()) {
-            let shortestStep = pq.dequeue();
-            let currentNode = shortestStep[0];
-            this.adjacencyList[currentNode].forEach(neighbor => {
-                let time = times[currentNode] + neighbor.weight;
-                if (time < times[neighbor.node]) {
-                    times[neighbor.node] = time;
-                    backtrace[neighbor.node] = currentNode;
-                    pq.enqueue([neighbor.node, time]);
-                }
-            });
-        }
-        let path = [endNode];
-        let lastStep = endNode;
-        while(lastStep !== startNode) {
-          path.unshift(backtrace[lastStep])
-          lastStep = backtrace[lastStep]
-        }
-        console.log(`Path is ${path} and time is ${times[endNode]}`);
-        return `Path is ${path} and time is ${times[endNode]}`
-    }
 }
 
 
@@ -368,6 +342,6 @@ g.addEdge('2531','2529')
 
 // Print the graph
 g.printGraph();
-console.log(g.findPathWithDijkstra('C29','Math Office'));
+
 //console.log("BFS")
 //g.bfs('C10')
