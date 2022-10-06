@@ -19,6 +19,7 @@ class Queue {
             return "Underflow";
         return this.items.shift();
     }
+    // front()
 
     // isEmpty()
     isEmpty() {
@@ -181,7 +182,7 @@ class Graph {
         while (!pq.isEmpty()) {
             let shortestStep = pq.dequeue();
             let currentNode = shortestStep[0];
-            this.adjacencyList[currentNode].forEach(neighbor => {
+            this.AdjList[currentNode].forEach(neighbor => {
                 let time = times[currentNode] + neighbor.weight;
                 if (time < times[neighbor.node]) {
                     times[neighbor.node] = time;
