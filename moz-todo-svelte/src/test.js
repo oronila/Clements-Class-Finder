@@ -1,39 +1,32 @@
-
-
-class Queue {
+class PriorityQueue {
     constructor() {
-        this.items = [];
+      this.collection = [];
     }
-    // Functions to be implemented
-    // enqueue(item)
-    enqueue(element) {
-        // adding element to the queue
-        this.items.push(element);
+    enqueue(element){
+        if (this.isEmpty()){ 
+          this.collection.push(element);
+        } else {
+          let added = false;
+          for (let i = 1; i <= this.collection.length; i++){
+            if (element[1] < this.collection[i-1][1]){ 
+              this.collection.splice(i-1, 0, element);
+              added = true;
+              break;
+            }
+          }
+          if (!added){
+              this.collection.push(element);
+          }
+        }
+      };
+      dequeue() {
+        let value = this.collection.shift();
+        return value;
+      };
+      isEmpty() {
+        return (this.collection.length === 0) 
+      };
     }
-    // dequeue()
-    dequeue() {
-        // removing element from the queue
-        // returns underflow when called 
-        // on empty queue
-        if (this.isEmpty())
-            return "Underflow";
-        return this.items.shift();
-    }
-    // front()
-
-    // isEmpty()
-    isEmpty() {
-        // return true if the queue is empty.
-        return this.items.length == 0;
-    }
-    // printQueue()
-    printQueue() {
-        var str = "";
-        for (var i = 0; i < this.items.length; i++)
-            str += this.items[i] + " ";
-        return str;
-    }
-}
 
 
 
@@ -43,134 +36,140 @@ class Queue {
 class Graph {
     // defining vertex array and
     // adjacent list
-    constructor(noOfVertices) {
-        this.noOfVertices = noOfVertices;
-        this.AdjList = new Map();
-    }
+    constructor() {
+        this.nodes = [];
+        this.adjacencyList = {};
+      }
 
     // functions to be implemented
 
-    addVertex(v) {
-        this.AdjList.set(v, []);
+    addVertex(node) {
+        this.nodes.push(node); 
+        this.adjacencyList[node] = [];
     }
 
-    addEdge(v, w) {
-        this.AdjList.get(v).push(w);
-        this.AdjList.get(w).push(v);
+    addEdge(node1, node2) {
+        this.adjacencyList[node1].push({node:node2, weight: 1});
+        this.adjacencyList[node2].push({node:node1, weight: 1});
     }
-    addEdge2(v, w, w2) {
-        this.AdjList.get(v).push(w);
-        this.AdjList.get(w).push(v);
-        this.AdjList.get(v).push(w2);
-        this.AdjList.get(w2).push(v);
+    addEdge2(node1, node2, node3) {
+        this.adjacencyList[node1].push({node:node2, weight: 1});
+        this.adjacencyList[node2].push({node:node1, weight: 1});
+        this.adjacencyList[node1].push({node:node3, weight: 1});
+        this.adjacencyList[node3].push({node:node1, weight: 1});
     }
-    addEdge3(v, w, w2, w3) {
-        this.AdjList.get(v).push(w);
-        this.AdjList.get(w).push(v);
-        this.AdjList.get(v).push(w2);
-        this.AdjList.get(w2).push(v);
-        this.AdjList.get(v).push(w3);
-        this.AdjList.get(w3).push(v);
+    addEdge3(node1, node2, node3, node4) {
+        this.adjacencyList[node1].push({node:node2, weight: 1});
+        this.adjacencyList[node2].push({node:node1, weight: 1});
+        this.adjacencyList[node1].push({node:node3, weight: 1});
+        this.adjacencyList[node3].push({node:node1, weight: 1});
+        this.adjacencyList[node1].push({node:node4, weight: 1});
+        this.adjacencyList[node4].push({node:node1, weight: 1});
     }
-    addEdge4(v, w, w2, w3, w4) {
-        this.AdjList.get(v).push(w);
-        this.AdjList.get(w).push(v);
-        this.AdjList.get(v).push(w2);
-        this.AdjList.get(w2).push(v);
-        this.AdjList.get(v).push(w3);
-        this.AdjList.get(w3).push(v);
-        this.AdjList.get(v).push(w4);
-        this.AdjList.get(w4).push(v);
+    addEdge4(node1, node2, node3, node4, node5) {
+        this.adjacencyList[node1].push({node:node2, weight: 1});
+        this.adjacencyList[node2].push({node:node1, weight: 1});
+        this.adjacencyList[node1].push({node:node3, weight: 1});
+        this.adjacencyList[node3].push({node:node1, weight: 1});
+        this.adjacencyList[node1].push({node:node4, weight: 1});
+        this.adjacencyList[node4].push({node:node1, weight: 1});
+        this.adjacencyList[node1].push({node:node5, weight: 1});
+        this.adjacencyList[node5].push({node:node1, weight: 1});
     }
-    addEdge5(v, w, w2, w3, w4, w5) {
-        this.AdjList.get(v).push(w);
-        this.AdjList.get(w).push(v);
-        this.AdjList.get(v).push(w2);
-        this.AdjList.get(w2).push(v);
-        this.AdjList.get(v).push(w3);
-        this.AdjList.get(w3).push(v);
-        this.AdjList.get(v).push(w4);
-        this.AdjList.get(w4).push(v);
-        this.AdjList.get(v).push(w5);
-        this.AdjList.get(w5).push(v);
+    addEdge5(node1, node2, node3, node4, node5, node6) {
+        this.adjacencyList[node1].push({node:node2, weight: 1});
+        this.adjacencyList[node2].push({node:node1, weight: 1});
+        this.adjacencyList[node1].push({node:node3, weight: 1});
+        this.adjacencyList[node3].push({node:node1, weight: 1});
+        this.adjacencyList[node1].push({node:node4, weight: 1});
+        this.adjacencyList[node4].push({node:node1, weight: 1});
+        this.adjacencyList[node1].push({node:node5, weight: 1});
+        this.adjacencyList[node5].push({node:node1, weight: 1});
+        this.adjacencyList[node1].push({node:node6, weight: 1});
+        this.adjacencyList[node6].push({node:node1, weight: 1});
     }
-    addEdge6(v, w, w2, w3, w4, w5, w6) {
-        this.AdjList.get(v).push(w);
-        this.AdjList.get(w).push(v);
-        this.AdjList.get(v).push(w2);
-        this.AdjList.get(w2).push(v);
-        this.AdjList.get(v).push(w3);
-        this.AdjList.get(w3).push(v);
-        this.AdjList.get(v).push(w4);
-        this.AdjList.get(w4).push(v);
-        this.AdjList.get(v).push(w5);
-        this.AdjList.get(w5).push(v);
-        this.AdjList.get(v).push(w6);
-        this.AdjList.get(w6).push(v);
+    addEdge5(node1, node2, node3, node4, node5, node6) {
+        this.adjacencyList[node1].push({node:node2, weight: 1});
+        this.adjacencyList[node2].push({node:node1, weight: 1});
+        this.adjacencyList[node1].push({node:node3, weight: 1});
+        this.adjacencyList[node3].push({node:node1, weight: 1});
+        this.adjacencyList[node1].push({node:node4, weight: 1});
+        this.adjacencyList[node4].push({node:node1, weight: 1});
+        this.adjacencyList[node1].push({node:node5, weight: 1});
+        this.adjacencyList[node5].push({node:node1, weight: 1});
+        this.adjacencyList[node1].push({node:node6, weight: 1});
+        this.adjacencyList[node6].push({node:node1, weight: 1});
+    }
+    addEdge6(node1, node2, node3, node4, node5, node6, node7) {
+        this.adjacencyList[node1].push({node:node2, weight: 1});
+        this.adjacencyList[node2].push({node:node1, weight: 1});
+        this.adjacencyList[node1].push({node:node3, weight: 1});
+        this.adjacencyList[node3].push({node:node1, weight: 1});
+        this.adjacencyList[node1].push({node:node4, weight: 1});
+        this.adjacencyList[node4].push({node:node1, weight: 1});
+        this.adjacencyList[node1].push({node:node5, weight: 1});
+        this.adjacencyList[node5].push({node:node1, weight: 1});
+        this.adjacencyList[node1].push({node:node6, weight: 1});
+        this.adjacencyList[node6].push({node:node1, weight: 1});
+        this.adjacencyList[node1].push({node:node7, weight: 1});
+        this.adjacencyList[node7].push({node:node1, weight: 1});
     }
 
 
     printGraph() {
         // get all the vertices
-        var get_keys = this.AdjList.keys();
-
-        // iterate over the vertices
-        for (var i of get_keys) {
-            // great the corresponding adjacency list
-            // for the vertex
-            var get_values = this.AdjList.get(i);
-            var conc = "";
-
-            // iterate over the adjacency list
-            // concatenate the values into a string
-            for (var j of get_values)
-                conc += j + " ";
-
-            // print the vertex and its adjacency list
-            console.log(i + " -> " + conc);
+        console.log(this.adjacencyList);
+        console.log(this.adjacencyList.length);
+        for (var i = 0; i < this.adjacencyList.length; i++){
+            console.log(this.adjacencyList[i]);
+            this.adjacencyList[i].forEach(neighbor => {
+                console.log(neighbor.node);
+            });
         }
+        
+
     }
 
-    bfs(startingNode) {
+    // bfs(startingNode) {
 
-        // create a visited object
-        var visited = {};
+    //     // create a visited object
+    //     var visited = {};
 
-        // Create an object for queue
-        var q = new Queue();
+    //     // Create an object for queue
+    //     var q = new Queue();
 
-        // add the starting node to the queue
-        visited[startingNode] = true;
-        q.enqueue(startingNode);
+    //     // add the starting node to the queue
+    //     visited[startingNode] = true;
+    //     q.enqueue(startingNode);
 
-        // loop until queue is empty
-        while (!q.isEmpty()) {
-            // get the element from the queue
-            var getQueueElement = q.dequeue();
+    //     // loop until queue is empty
+    //     while (!q.isEmpty()) {
+    //         // get the element from the queue
+    //         var getQueueElement = q.dequeue();
 
-            // passing the current vertex to callback function
-            console.log(getQueueElement);
+    //         // passing the current vertex to callback function
+    //         console.log(getQueueElement);
 
-            // get the adjacent list for current vertex
-            var get_List = this.AdjList.get(getQueueElement);
+    //         // get the adjacent list for current vertex
+    //         var get_List = this.AdjList.get(getQueueElement);
 
-            // loop through the list and add the element to the
-            // queue if it is not processed yet
-            for (var i in get_List) {
-                var neigh = get_List[i];
+    //         // loop through the list and add the element to the
+    //         // queue if it is not processed yet
+    //         for (var i in get_List) {
+    //             var neigh = get_List[i];
 
-                if (!visited[neigh]) {
-                    visited[neigh] = true;
-                    q.enqueue(neigh);
-                }
-            }
-        }
-    }
+    //             if (!visited[neigh]) {
+    //                 visited[neigh] = true;
+    //                 q.enqueue(neigh);
+    //             }
+    //         }
+    //     }
+    // }
     // dfs(v)
     findPathWithDijkstra(startNode, endNode){
         let times = {};
         let backtrace = {};
-        let pq = new Queue();
+        let pq = new PriorityQueue();
         times[startNode] = 0;
       
         this.nodes.forEach(node => {
@@ -182,7 +181,7 @@ class Graph {
         while (!pq.isEmpty()) {
             let shortestStep = pq.dequeue();
             let currentNode = shortestStep[0];
-            this.AdjList[currentNode].forEach(neighbor => {
+            this.adjacencyList[currentNode].forEach(neighbor => {
                 let time = times[currentNode] + neighbor.weight;
                 if (time < times[neighbor.node]) {
                     times[neighbor.node] = time;
@@ -197,7 +196,6 @@ class Graph {
           path.unshift(backtrace[lastStep])
           lastStep = backtrace[lastStep]
         }
-        console.log(`Path is ${path} and time is ${times[endNode]}`);
         return `Path is ${path} and time is ${times[endNode]}`
     }
 }
@@ -368,7 +366,8 @@ g.addEdge('2519','2518','2517')
 g.addEdge('2531','2529')
 
 // Print the graph
-g.printGraph();
+//g.printGraph();
 console.log(g.findPathWithDijkstra('C29','Math Office'));
+g.printGraph();
 //console.log("BFS")
 //g.bfs('C10')
