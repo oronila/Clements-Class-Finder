@@ -6,7 +6,12 @@
 	import Main from './Main.svelte'
 	import AboutUs from './About.svelte'
 	import ContactUs from './Contact.svelte'
+	import L from 'leaflet';
+	import MapToolbar from './MapToolbar.svelte';
+	import MarkerPopup from './MarkerPopup.svelte';
+	import * as markerIcons from './markers.js';
 	import './test.js'
+	let map;
 
 	history.replaceState({"href_to_show":"/"}, "", "/")
 
