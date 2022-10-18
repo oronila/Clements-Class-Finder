@@ -204,10 +204,10 @@
 </svelte:head>
 
 <style>
-	/*:global(body) {
+	:global(body) {
 		padding: 0;
 		overflow: hidden;
-	}*/
+	}
 	.map :global(.marker-text) {
 		width:100%;
 		text-align:center;
