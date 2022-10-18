@@ -40,7 +40,7 @@
 	function createMap(container) {
 	  let m = L.map(container, {preferCanvas: true }).setView(initialView, 5);
     L.tileLayer(
-	    '/images/0001.jpg',
+	    'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
 	    {
 	      subdomains: 'abcd',
 	      maxZoom: 14,
@@ -206,7 +206,7 @@
 <style>
 	:global(body) {
 		padding: 0;
-		overflow: hidden;
+		overflow-x: hidden;
 	}
 	.map :global(.marker-text) {
 		width:100%;
