@@ -43,7 +43,7 @@
 	    'https://raw.githubusercontent.com/oronila/Clements-Class-Finder/main/moz-todo-svelte/src/images/0001.jpg',
 	    {
 	      subdomains: 'abcd',
-	      maxZoom: 2,
+	      maxZoom: 10,
 	    }
 	  ).addTo(m);
 
