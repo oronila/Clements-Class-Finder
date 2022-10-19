@@ -40,10 +40,10 @@
 	function createMap(container) {
 	  let m = L.map(container, {preferCanvas: true }).setView(initialView, 5);
     L.tileLayer(
-	    'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
+	    'https://raw.githubusercontent.com/oronila/Clements-Class-Finder/main/moz-todo-svelte/src/images/0001.jpg',
 	    {
 	      subdomains: 'abcd',
-	      maxZoom: 14,
+	      maxZoom: 2,
 	    }
 	  ).addTo(m);
 
@@ -206,7 +206,7 @@
 <style>
 	:global(body) {
 		padding: 0;
-		overflow-x: hidden;
+		overflow: hidden;
 	}
 	.map :global(.marker-text) {
 		width:100%;
