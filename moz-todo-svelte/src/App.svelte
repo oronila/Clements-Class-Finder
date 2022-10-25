@@ -42,13 +42,18 @@
     L.tileLayer(
 	    'https://raw.githubusercontent.com/oronila/Clements-Class-Finder/main/moz-todo-svelte/src/images/0001.jpg',
 	    {
-	      subdomains: 'abcd',
-	      maxZoom: 10,
+          tileSize: L.point(512, 512),
+          attribution: 'Rendered with <a href="https://www.maptiler.com/desktop/">MapTiler Desktop</a>',
+          noWrap: true,	
+		  maxNativeZoom: 1,
+		  minNativeZoom: 1,
+		  //bounds: L.latLngBounds(L.latLng(40.712, -74.227), L.latLng(40.774, -74.125))
 	    }
 	  ).addTo(m);
 
     return m;
   }
+  
 	
 	let eye = true;
 	let lines = true;
@@ -186,6 +191,7 @@
 	function resizeMap() {
 	  if(map) { map.invalidateSize(); }
   	}
+	
 </script>
 
 
