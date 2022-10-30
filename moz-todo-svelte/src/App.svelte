@@ -37,20 +37,23 @@
 	];
 	
 	const initialView = [39.8283, -98.5795];
+	var mapBounds = new L.LatLngBounds([1, 5000], [5000, 1])
 	function createMap(container) {
 	  let m = L.map(container, {preferCanvas: true }).setView(initialView, 5);
     L.tileLayer(
-	    'https://raw.githubusercontent.com/oronila/Clements-Class-Finder/main/moz-todo-svelte/src/images/0001.jpg',
+	    '/images/0001.png',
 	    {
           tileSize: L.point(512, 512),
           attribution: 'Rendered with <a href="https://www.maptiler.com/desktop/">MapTiler Desktop</a>',
-          noWrap: true,	
 		  maxNativeZoom: 1,
 		  minNativeZoom: 1,
+		  bounds: mapBounds,
 		  //bounds: L.latLngBounds(L.latLng(40.712, -74.227), L.latLng(40.774, -74.125))
+		  noWrap: true
+		  
 	    }
 	  ).addTo(m);
-
+	  m.setMaxBounds(mapBounds);
     return m;
   }
   
@@ -75,7 +78,7 @@
 
 		return div;
 	}
-
+	
 	toolbar.onRemove = () => {
 		if(toolbarComponent) {
 			toolbarComponent.$destroy();
