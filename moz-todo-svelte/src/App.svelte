@@ -26,7 +26,7 @@
 			window.location = "/";
 		}
 	};
-	/*const markerLocations = [
+	const markerLocations = [
 		[29.8283, -96.5795],
 		[37.8283, -90.5795],
 		[43.8283, -102.5795],
@@ -37,11 +37,9 @@
 	];
 
 	const initialView = [39.8283, -98.5795];
+	/*
 	function createMap(container) {
-		let m = L.map(container, { preferCanvas: true }).setView(
-			initialView,
-			5
-		);
+		var map = L.map(container, { preferCanvas: true }).setView([0.0018, 0.0009], 100);
 		L.tileLayer(
 			"https://api.maptiler.com/tiles/ae99d4c3-0837-4d58-a1cd-5a90fb8dc8d5/{z}/{x}/{y}.png?key=qBCWEKsk0ghptooQD7FI",
 			{
@@ -49,14 +47,14 @@
 					'Rendered with \u003ca href="https://www.maptiler.com/desktop/"\u003eMapTiler Desktop\u003c/a\u003e',
 				crossOrigin: true,
 			}
-		).addTo(m);
+		).addTo(map);
 
-		return m;
+		return map;
 	}
-
+	*/
 	let eye = true;
 	let lines = true;
-
+	/*
 	let toolbar = L.control({ position: "topright" });
 	let toolbarComponent;
 	toolbar.onAdd = (map) => {
@@ -74,7 +72,7 @@
 
 		return div;
 	};
-
+	*/
 	toolbar.onRemove = () => {
 		if (toolbarComponent) {
 			toolbarComponent.$destroy();
@@ -84,6 +82,7 @@
 
 	// Create a popup with a Svelte component inside it and handle removal when the popup is torn down.
 	// `createFn` will be called whenever the popup is being created, and should create and return the component.
+	/*
 	function bindPopup(marker, createFn) {
 		let popupComponent;
 		marker.bindPopup(() => {
@@ -103,7 +102,7 @@
 			}
 		});
 	}
-
+	
 	let markers = new Map();
 
 	function markerIcon(count) {
@@ -136,7 +135,7 @@
 
 		return marker;
 	}
-
+	*/
 	function createLines() {
 		return L.polyline(markerLocations, { color: "#E4E", opacity: 0.5 });
 	}
@@ -190,8 +189,35 @@
 			map.invalidateSize();
 		}
 	}
-	*/
 </script>
+
+<style>
+	#map {
+			position: absolute;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+		}
+		
+	:global(body) {
+		padding: 0;
+		overflow: hidden;
+	}
+	#map :global(.marker-text) {
+		width: 100%;
+		text-align: center;
+		font-weight: 600;
+		background-color: #444;
+		color: #eee;
+		border-radius: 0.5rem;
+	}
+
+	#map :global(.map-marker) {
+		width: 30px;
+		transform: translateX(-50%) translateY(-25%);
+	}
+</style>
 
 <Sidebar bind:open />
 <Navbar bind:sidebar={open} />
@@ -203,15 +229,8 @@
 
 <svelte:head>
 	<link
-		href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css"
-		rel="stylesheet"
-	/>
-</svelte:head>
-
-<head>
-	<meta
-		name="viewport"
-		content="initial-scale=1,maximum-scale=1,user-scalable=no"
+	href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css"
+	rel="stylesheet"
 	/>
 	<link
 		rel="stylesheet"
@@ -220,18 +239,11 @@
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"
 	></script>
-	<style>
-		#map {
-			position: absolute;
-			top: 0;
-			right: 0;
-			bottom: 0;
-			left: 0;
-		}
-	</style>
-</head>
+</svelte:head>
+
 <body>
 	<div id="map">
+		<iframe title="clements school map" width="100%" height="100%" src="https://api.maptiler.com/tiles/ae99d4c3-0837-4d58-a1cd-5a90fb8dc8d5/?key=qBCWEKsk0ghptooQD7FI#19.2/0.00174/0.00062"></iframe>
 		<a
 			href="https://www.maptiler.com"
 			style="position:absolute;left:10px;bottom:10px;z-index:999;"
@@ -241,12 +253,8 @@
 			/></a
 		>
 	</div>
-	<p>
-		Rendered with <a href="https://www.maptiler.com/desktop/"
-			>MapTiler Desktop</a
-		>
-	</p>
 	<script>
+		/*
 		var map = L.map("map").setView([0.0018, 0.0009], 100);
 		L.tileLayer(
 			"https://api.maptiler.com/tiles/ae99d4c3-0837-4d58-a1cd-5a90fb8dc8d5/{z}/{x}/{y}.png?key=qBCWEKsk0ghptooQD7FI",
@@ -254,28 +262,8 @@
 				attribution:
 					'Rendered with \u003ca href="https://www.maptiler.com/desktop/"\u003eMapTiler Desktop\u003c/a\u003e',
 				crossOrigin: true,
-				
 			}
 		).addTo(map);
+		*/
 	</script>
 </body>
-
-<style>
-	:global(body) {
-		padding: 0;
-		overflow: hidden;
-	}
-	.map :global(.marker-text) {
-		width: 100%;
-		text-align: center;
-		font-weight: 600;
-		background-color: #444;
-		color: #eee;
-		border-radius: 0.5rem;
-	}
-
-	.map :global(.map-marker) {
-		width: 30px;
-		transform: translateX(-50%) translateY(-25%);
-	}
-</style>
