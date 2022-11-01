@@ -6,7 +6,7 @@
 </script>
 
 <header
-	class="flex justify-between bg-blue-200 p-2 items-center text-black-600 border-b-2"
+	class="flex justify-between bg-blue-200 p-3 items-center text-black-600 border-b-2"
 >
 	<nav class="flex">
 		<div class="Logo">
@@ -20,8 +20,6 @@
 <style>
 	.flex {
 		height: 8%;
-		padding-bottom: 0;
-		margin: 0;
 	}
 	.Logo {
 		display: flex;
