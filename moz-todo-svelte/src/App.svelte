@@ -243,7 +243,7 @@
 
 <body>
 	<div id="map">
-		<iframe title="clements school map" width="100%" height="100%" src="https://api.maptiler.com/tiles/ae99d4c3-0837-4d58-a1cd-5a90fb8dc8d5/?key=qBCWEKsk0ghptooQD7FI#19.2/0.00174/0.00062"></iframe>
+		<iframe title="clements school map" width="100%" height="92%" src="https://api.maptiler.com/tiles/ae99d4c3-0837-4d58-a1cd-5a90fb8dc8d5/?key=qBCWEKsk0ghptooQD7FI#19.2/0.00174/0.00062"></iframe>
 		<a
 			href="https://www.maptiler.com"
 			style="position:absolute;left:10px;bottom:10px;z-index:999;"
