@@ -42,7 +42,6 @@
         layer = L.tileLayer('{z}/{x}/{y}.png', {
           minZoom: mapMinZoom, maxZoom: mapMaxZoom,
           tileSize: L.point(512, 512),
-          attribution: 'Rendered with <a href="https://www.maptiler.com/desktop/">MapTiler Desktop</a>',
           noWrap: true,
           tms: false
         }).addTo(map);

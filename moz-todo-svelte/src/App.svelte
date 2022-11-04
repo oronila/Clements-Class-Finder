@@ -1,3 +1,9 @@
+
+<meta charset="utf-8">
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+
 <script>
 	import { page_shown } from "./data";
 
@@ -11,8 +17,7 @@
 	import MarkerPopup from "./MarkerPopup.svelte";
 	import * as markerIcons from "./markers.js";
 	import "./test.js";
-	let map;
-
+	
 	history.replaceState({ href_to_show: "/" }, "", "/");
 
 	window.addEventListener("popstate", (e) => {
@@ -21,11 +26,7 @@
 	});
 	let open = false;
 
-	window.onload = function () {
-		if (window.location == "/about") {
-			window.location = "/";
-		}
-	};
+	
 	const markerLocations = [
 		[29.8283, -96.5795],
 		[37.8283, -90.5795],
@@ -36,7 +37,7 @@
 		[38.4, -122.5795],
 	];
 
-	const initialView = [39.8283, -98.5795];
+	
 	/*
 	function createMap(container) {
 		var map = L.map(container, { preferCanvas: true }).setView([0.0018, 0.0009], 100);
@@ -52,8 +53,6 @@
 		return map;
 	}
 	*/
-	let eye = true;
-	let lines = true;
 	/*
 	let toolbar = L.control({ position: "topright" });
 	let toolbarComponent;
@@ -136,7 +135,7 @@
 		return marker;
 	}
 	*/
-	function createLines() {
+	/*function createLines() {
 		return L.polyline(markerLocations, { color: "#E4E", opacity: 0.5 });
 	}
 
@@ -188,7 +187,7 @@
 		if (map) {
 			map.invalidateSize();
 		}
-	}
+	}*/
 </script>
 
 <style>
@@ -232,38 +231,51 @@
 	href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css"
 	rel="stylesheet"
 	/>
-	<link
-		rel="stylesheet"
-		href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css"
-	/>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"
-	></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.1/leaflet.css">
+	<link rel="stylesheet" href="https://cdn.rawgit.com/ardhi/Leaflet.MousePosition/master/src/L.Control.MousePosition.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.1/leaflet.js" type="text/javascript"></script>
+    <script src="https://cdn.rawgit.com/ardhi/Leaflet.MousePosition/master/src/L.Control.MousePosition.js" type="text/javascript"></script>
+	<style>
+		html, body, #map { width:100%; height:100%; margin:0; padding:0; z-index: 1; background: #ffffff; }
+		#slider{ position: absolute; top: 10px; right: 10px; z-index: 5; }
+	  </style>
 </svelte:head>
 
 <body>
-	<div id="map">
-		<iframe title="clements school map" width="100%" height="92%" src="https://api.maptiler.com/tiles/ae99d4c3-0837-4d58-a1cd-5a90fb8dc8d5/?key=qBCWEKsk0ghptooQD7FI#19.2/0.00174/0.00062"></iframe>
-		<a
-			href="https://www.maptiler.com"
-			style="position:absolute;left:10px;bottom:10px;z-index:999;"
-			><img
-				src="https://api.maptiler.com/resources/logo.svg"
-				alt="MapTiler logo"
-			/></a
-		>
-	</div>
+	<div id="map"></div>
 	<script>
-		/*
-		var map = L.map("map").setView([0.0018, 0.0009], 100);
-		L.tileLayer(
-			"https://api.maptiler.com/tiles/ae99d4c3-0837-4d58-a1cd-5a90fb8dc8d5/{z}/{x}/{y}.png?key=qBCWEKsk0ghptooQD7FI",
-			{
-				attribution:
-					'Rendered with \u003ca href="https://www.maptiler.com/desktop/"\u003eMapTiler Desktop\u003c/a\u003e',
-				crossOrigin: true,
-			}
-		).addTo(map);
-		*/
+		var mapExtent = [0.00000000, -2250.00000000, 3000.00000000, 0.00000000];
+      var mapMinZoom = 0;
+      var mapMaxZoom = 3;
+      var mapMaxResolution = 1.00000000;
+      var mapMinResolution = Math.pow(2, mapMaxZoom) * mapMaxResolution;
+      var tileExtent = [0.00000000, -2250.00000000, 3000.00000000, 0.00000000];
+      var crs = L.CRS.Simple;
+      crs.transformation = new L.Transformation(1, -tileExtent[0], -1, tileExtent[3]);
+      crs.scale = function(zoom) {
+        return Math.pow(2, zoom) / mapMinResolution;
+      };
+      crs.zoom = function(scale) {
+        return Math.log(scale * mapMinResolution) / Math.LN2;
+      };
+      var layer;
+      var map = new L.Map('map', {
+          maxZoom: mapMaxZoom,
+          minZoom: mapMinZoom,
+          crs: crs
+        });
+        
+        layer = L.tileLayer("images/{z}/{x}/{y}.png", {
+          minZoom: mapMinZoom, maxZoom: mapMaxZoom,
+          tileSize: L.point(512, 512),
+          noWrap: true,
+          tms: false
+        }).addTo(map);
+      map.fitBounds([
+        crs.unproject(L.point(mapExtent[2], mapExtent[3])),
+        crs.unproject(L.point(mapExtent[0], mapExtent[1]))
+      ]);
+      L.control.mousePosition().addTo(map)
+		
 	</script>
 </body>
