@@ -17,7 +17,7 @@
 	import MarkerPopup from "./MarkerPopup.svelte";
 	import * as markerIcons from "./markers.js";
 	import "./test.js";
-	
+
 	history.replaceState({ href_to_show: "/" }, "", "/");
 
 	window.addEventListener("popstate", (e) => {
@@ -25,17 +25,6 @@
 		$page_shown = e.state.href_to_show;
 	});
 	let open = false;
-
-	
-	const markerLocations = [
-		[29.8283, -96.5795],
-		[37.8283, -90.5795],
-		[43.8283, -102.5795],
-		[48.4, -122.5795],
-		[43.6, -79.5795],
-		[36.8283, -100.5795],
-		[38.4, -122.5795],
-	];
 
 	
 	/*
@@ -71,7 +60,7 @@
 
 		return div;
 	};
-	*/
+	
 	toolbar.onRemove = () => {
 		if (toolbarComponent) {
 			toolbarComponent.$destroy();
@@ -81,7 +70,7 @@
 
 	// Create a popup with a Svelte component inside it and handle removal when the popup is torn down.
 	// `createFn` will be called whenever the popup is being created, and should create and return the component.
-	/*
+
 	function bindPopup(marker, createFn) {
 		let popupComponent;
 		marker.bindPopup(() => {
@@ -134,8 +123,8 @@
 
 		return marker;
 	}
-	*/
-	/*function createLines() {
+
+	function createLines() {
 		return L.polyline(markerLocations, { color: "#E4E", opacity: 0.5 });
 	}
 
@@ -164,7 +153,7 @@
 			},
 		};
 	}
-
+	
 	// We could do these in the toolbar's click handler but this is an example
 	// of modifying the map with reactive syntax.
 	$: if (markerLayers && map) {
@@ -187,7 +176,8 @@
 		if (map) {
 			map.invalidateSize();
 		}
-	}*/
+	}
+	*/
 </script>
 
 <style>
@@ -236,7 +226,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.1/leaflet.js" type="text/javascript"></script>
     <script src="https://cdn.rawgit.com/ardhi/Leaflet.MousePosition/master/src/L.Control.MousePosition.js" type="text/javascript"></script>
 	<style>
-		html, body, #map { width:100%; height:100%; margin:0; padding:0; z-index: 1; background: #ffffff; }
+		html, body, #map { width:100%; height:98%; margin:0; padding:0; z-index: 1; background: #ffffff; }
 		#slider{ position: absolute; top: 10px; right: 10px; z-index: 5; }
 	  </style>
 </svelte:head>
@@ -244,7 +234,23 @@
 <body>
 	<div id="map"></div>
 	<script>
-		var mapExtent = [0.00000000, -2250.00000000, 3000.00000000, 0.00000000];
+		import L from 'leaflet';
+	import MapToolbar from './MapToolbar.svelte';
+	import MarkerPopup from './MarkerPopup.svelte';
+	import * as markerIcons from './markers.js';
+	let map;
+	
+	const markerLocations = [
+		[29.8283, -96.5795],
+		[37.8283, -90.5795],
+		[43.8283, -102.5795],
+		[48.40, -122.5795],
+		[43.60, -79.5795],
+		[36.8283, -100.5795],
+		[38.40, -122.5795],
+	];
+	
+	  var mapExtent = [0.00000000, -2250.00000000, 3000.00000000, 0.00000000];
       var mapMinZoom = 0;
       var mapMaxZoom = 3;
       var mapMaxResolution = 1.00000000;
@@ -276,6 +282,141 @@
         crs.unproject(L.point(mapExtent[0], mapExtent[1]))
       ]);
       L.control.mousePosition().addTo(map)
+	  let eye = true;
+	let lines = true;
+	
+	let toolbar = L.control({ position: 'topright' });
+	let toolbarComponent;
+	toolbar.onAdd = (map) => {
+		let div = L.DomUtil.create('div');
+		toolbarComponent = new MapToolbar({
+			target: div,
+			props: {}
+		});
+
+		toolbarComponent.$on('click-eye', ({ detail }) => eye = detail);
+		toolbarComponent.$on('click-lines', ({ detail }) => lines = detail);
+		toolbarComponent.$on('click-reset', () => {
+			map.setView(initialView, 5, { animate: true })
+		})
+
+		return div;
+	}
+
+	toolbar.onRemove = () => {
+		if(toolbarComponent) {
+			toolbarComponent.$destroy();
+			toolbarComponent = null;
+		}
+	};
+	
+	// Create a popup with a Svelte component inside it and handle removal when the popup is torn down.
+	// `createFn` will be called whenever the popup is being created, and should create and return the component.
+	function bindPopup(marker, createFn) {
+		let popupComponent;
+		marker.bindPopup(() => {
+			let container = L.DomUtil.create('div');
+			popupComponent = createFn(container);
+			return container;
+		});
+
+		marker.on('popupclose', () => {
+			if(popupComponent) {
+				let old = popupComponent;
+				popupComponent = null;
+				// Wait to destroy until after the fadeout completes.
+				setTimeout(() => {
+					old.$destroy();
+				}, 500);
+
+			}
+		});
+	}
+	
+	let markers = new Map();
+	
+	function markerIcon(count) {
+		let html = `<div class="map-marker"><div>${markerIcons.library}</div><div class="marker-text">${count}</div></div>`;
+		return L.divIcon({
+			html,
+			className: 'map-marker'
+		});
+	}
+	
+
+	function createMarker(loc) {
+		let count = Math.ceil(Math.random() * 25);
+		let icon = markerIcon(count);
+		let marker = L.marker(loc, {icon});
+		bindPopup(marker, (m) => {
+			let c = new MarkerPopup({
+				target: m,
+				props: {
+					count
+				}
+			});
+			
+			c.$on('change', ({detail}) => {
+				count = detail;
+				marker.setIcon(markerIcon(count));
+			});
+			
+			return c;
+		});
 		
+		return marker;
+	}
+	
+	function createLines() {
+		return L.polyline(markerLocations, { color: '#E4E', opacity: 0.5 });
+	}
+
+	let markerLayers;
+	let lineLayers;
+  function mapAction(container) {
+    map = createMap(container); 
+		toolbar.addTo(map);
+		
+		markerLayers = L.layerGroup()
+ 		for(let location of markerLocations) {
+ 			let m = createMarker(location);
+			markerLayers.addLayer(m);
+ 		}
+		
+		lineLayers = createLines();
+		
+		markerLayers.addTo(map);
+		lineLayers.addTo(map);
+		
+    return {
+       destroy: () => {
+				 toolbar.remove();
+				 map.remove();
+				 map = null;
+			 }
+    };
+	}
+	
+	// We could do these in the toolbar's click handler but this is an example
+	// of modifying the map with reactive syntax.
+	$: if(markerLayers && map) {
+		if(eye) {
+			markerLayers.addTo(map);
+		} else {
+			markerLayers.remove();
+		}
+	}
+	
+	$: if(lineLayers && map) {
+		if(lines) {
+			lineLayers.addTo(map);
+		} else {
+			lineLayers.remove();
+		}
+	}
+
+	function resizeMap() {
+	  if(map) { map.invalidateSize(); }
+  }
 	</script>
 </body>
