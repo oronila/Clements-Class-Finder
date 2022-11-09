@@ -39,7 +39,7 @@
 	function createMap(container) {
 	  let m = L.map(container).setView(initialView, 10);
     L.tileLayer(
-	    'images/{z}/{x}/{y}.png',
+	    'images2/{z}/{x}/{y}.png',
 	    {
 	      subdomains: 'abcd',
 		  tileSize: L.point(512,512),
