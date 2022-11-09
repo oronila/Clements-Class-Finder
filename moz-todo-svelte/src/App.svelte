@@ -3,7 +3,6 @@
 	
 	import Navbar from './Navbar.svelte'
 	import Sidebar from './Sidebar.svelte'
-	import Main from './Main.svelte'
 	import AboutUs from './About.svelte'
 	import ContactUs from './Contact.svelte'
 	import L from 'leaflet';
@@ -36,14 +35,17 @@
 		[38.40, -122.5795],
 	];
 	
-	const initialView = [39.8283, -98.5795];
+	const initialView = [0,75];
 	function createMap(container) {
-	  let m = L.map(container, {preferCanvas: true }).setView(initialView, 5);
+	  let m = L.map(container).setView(initialView, 10);
     L.tileLayer(
-	    'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
+	    'images/{z}/{x}/{y}.png',
 	    {
 	      subdomains: 'abcd',
-	      maxZoom: 14,
+		  tileSize: L.point(512,512),
+	      maxZoom: 3,
+		  minZoom: 1,
+		  noWrap: true,
 	    }
 	  ).addTo(m);
 
@@ -190,8 +192,7 @@
 
 
 <Sidebar bind:open/>
-<Navbar bind:sidebar={open}/>	
-<Main/>
+<Navbar bind:sidebar={open}/>
 
 
 {#if $page_shown == "about"}
@@ -204,6 +205,21 @@
 </svelte:head>
 
 <style>
+	
+	.map {
+		width: 100%;
+		height: 90%;
+		margin: 0;
+		padding: 0;
+		z-index: 1;
+		background: #ffffff;
+	}
+	
+	#slider {
+		position: absolute;
+		z-index: 2;
+	}
+
 	:global(body) {
 		padding: 0;
 		overflow-x: hidden;
