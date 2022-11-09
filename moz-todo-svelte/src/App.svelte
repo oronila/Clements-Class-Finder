@@ -138,7 +138,7 @@
 	}
 	
 	function createLines() {
-		return L.polyline(markerLocations, { color: '#E4E', opacity: 0.5 });
+		return L.polyline(markerLocations, { color: 'black', opacity: 0.8});
 	}
 
 	let markerLayers;
@@ -212,7 +212,7 @@
 		margin: 0;
 		padding: 0;
 		z-index: 1;
-		background: #ffffff;
+		background: #dbdbdb;
 	}
 	
 	#slider {
@@ -228,7 +228,7 @@
 		width:100%;
 		text-align:center;
 		font-weight:600;
-		background-color:#444;
+		background-color:rgb(38, 90, 165);
 		color:#EEE;
 		border-radius:0.5rem;
 	}
