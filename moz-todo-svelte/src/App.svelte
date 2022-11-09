@@ -38,18 +38,19 @@
 	const initialView = [0,75];
 	function createMap(container) {
 	  let m = L.map(container).setView(initialView, 10);
-    L.tileLayer(
-	    'images2/{z}/{x}/{y}.png',
-	    {
-	      subdomains: 'abcd',
-		  tileSize: L.point(512,512),
-	      maxZoom: 3,
-		  minZoom: 1,
-		  noWrap: true,
-	    }
-	  ).addTo(m);
-
-    return m;
+    	L.tileLayer(
+	    	'images2/{z}/{x}/{y}.png',
+	    	{
+	      		subdomains: 'abcd',
+		  		tileSize: L.point(512,512),
+	      		maxZoom: 3,
+		  		minZoom: 1,
+		  		noWrap: true,
+	    	}
+			
+	  	).addTo(m);
+		m.on('click', (event) => console.log(event))
+    	return m;
   }
 	
 	let eye = true;
@@ -242,4 +243,4 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
    integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
    crossorigin=""/>
-<div class="map" style="height:100%;width:100%" use:mapAction />
+<div class="map" style="height:93%;width:100%" use:mapAction />
