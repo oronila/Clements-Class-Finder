@@ -365,13 +365,11 @@ g.addEdge('2519','2518','2517')
 g.addEdge('2531','2529')
 
 
-
-var graph = g
-console.log(graph.findPathWithDijkstra('C29','Math Office'));
+//console.log(g.findPathWithDijkstra('C29','Math Office'));
 
 // Print the graph
 //g.printGraph();
 
-g.printGraph();
+//g.printGraph();
 //console.log("BFS")
 //g.bfs('C10')
