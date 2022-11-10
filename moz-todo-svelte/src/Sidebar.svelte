@@ -20,6 +20,9 @@
 </aside>
 
 <style>
+	*{
+		z-index: 3;
+	}
 	aside {
 		border-color: black;
 		background-color: rgb(190,227,248);	

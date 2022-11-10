@@ -236,11 +236,6 @@
 		background: #dbdbdb;
 	}
 	
-	#slider {
-		position: absolute;
-		z-index: 2;
-	}
-
 	:global(body) {
 		padding: 0;
 		overflow-x: hidden;
