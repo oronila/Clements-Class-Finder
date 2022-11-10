@@ -9,8 +9,12 @@
 	import MapToolbar from './MapToolbar.svelte';
 	import MarkerPopup from './MarkerPopup.svelte';
 	import * as markerIcons from './markers.js';
-	import './test.js'
+	//import Graph from './algorithm.js';
+	//import PriorityQueue from './algorithm.js';
 	let map;
+	//let priorityQueue = new PriorityQueue();
+	//let graph = new Graph();
+	//var g = new graph(1000);
 
 	history.replaceState({"href_to_show":"/"}, "", "/")
 
@@ -25,7 +29,23 @@
 			window.location = "/";
 		}
 	}
-	const markerLocations = [
+	//var route = g.findPathWithDijkstra('H1','1327')
+	var keys = ['Attendance Office', 'H1', 'C1', 'H2','1327','1326','1325','1324','H3'];
+	var values = [[80, -109.160156],
+		[80, -98.5],
+		[78.5, -98.5],
+		[78.5, -82.8],
+		[79.43293414566915, -93.515625],
+		[77.7, -84.72],
+		[79.06, -71.54],
+		[77.95,-81.2],
+		[78.5,-57.1289]
+	];
+
+	var result = {};
+	keys.forEach((key, i) => result[key] = values[i]);
+	console.log(result);
+	/*const markerLocations = [
 		[29.8283, -96.5795],
 		[37.8283, -90.5795],
 		[43.8283, -102.5795],
@@ -33,7 +53,7 @@
 		[43.60, -79.5795],
 		[36.8283, -100.5795],
 		[38.40, -122.5795],
-	];
+	];*/
 	
 	const initialView = [0,75];
 	function createMap(container) {
@@ -116,7 +136,7 @@
 	
 
 	function createMarker(loc) {
-		let count = Math.ceil(Math.random() * 25);
+		let count = 0;
 		let icon = markerIcon(count);
 		let marker = L.marker(loc, {icon});
 		bindPopup(marker, (m) => {
@@ -139,17 +159,16 @@
 	}
 	
 	function createLines() {
-		return L.polyline(markerLocations, { color: 'black', opacity: 0.8});
+		return L.polyline(values, { color: 'black', opacity: 0.8});
 	}
 
 	let markerLayers;
 	let lineLayers;
-  function mapAction(container) {
-    map = createMap(container); 
+  	function mapAction(container) {
+    	map = createMap(container); 
 		toolbar.addTo(map);
-		
 		markerLayers = L.layerGroup()
- 		for(let location of markerLocations) {
+ 		for(let location of values) {
  			let m = createMarker(location);
 			markerLayers.addLayer(m);
  		}
@@ -159,13 +178,13 @@
 		markerLayers.addTo(map);
 		lineLayers.addTo(map);
 		
-    return {
-       destroy: () => {
+    	return {
+       		destroy: () => {
 				 toolbar.remove();
 				 map.remove();
 				 map = null;
-			 }
-    };
+			}
+    	};
 	}
 	
 	// We could do these in the toolbar's click handler but this is an example
@@ -189,6 +208,7 @@
 	function resizeMap() {
 	  if(map) { map.invalidateSize(); }
   	}
+	
 </script>
 
 

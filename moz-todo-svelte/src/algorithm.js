@@ -196,10 +196,9 @@ class Graph {
           path.unshift(backtrace[lastStep])
           lastStep = backtrace[lastStep]
         }
-        return `Path is ${path} and time is ${times[endNode]}`
+        return path //and time is ${times[endNode]}`
     }
 }
-
 
 
 var g = new Graph(1000);
@@ -365,9 +364,14 @@ g.addEdge('S9','Math Office')
 g.addEdge('2519','2518','2517')
 g.addEdge('2531','2529')
 
+
+
+var graph = g
+console.log(graph.findPathWithDijkstra('C29','Math Office'));
+
 // Print the graph
 //g.printGraph();
-console.log(g.findPathWithDijkstra('C29','Math Office'));
+
 g.printGraph();
 //console.log("BFS")
 //g.bfs('C10')
