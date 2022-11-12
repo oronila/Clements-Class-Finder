@@ -318,8 +318,11 @@
 	g.addEdge('2531','2529')
 
 
-	var ans = g.findPathWithDijkstra('H1','1325');
 
+
+
+	var ans = g.findPathWithDijkstra('1322','H16');
+	console.log(ans);
 
 
 
@@ -342,7 +345,10 @@
 		}
 	}
 	//var route = g.findPathWithDijkstra('H1','1327')
-	var keys = ['Attendance Office', 'H1', 'C1', 'H2','1327','1326','1325','1324','H3'];
+	var xRooms = ['1327','1325','1326','1324','1323','B1','1322','1320','1317','1315','1313','1311','1316','1312','1311', 'C3']
+	var yRooms = ['Attendance Office','1520','1521','1522','ARD','H16']
+	var keys = ['Attendance Office', 'H1', 'C1', 'H2','1327','1326','1325','1324','H3', '1323', '1322','1320', 'H4', 'C2','C6','H9','1520','1521','H10','1522','ARD',
+				'H7','H6','1317','1315','1314','1316','1313','1311','1312','C3','H5','C4','H16','H8'];
 	var values = [[80, -109.160156],
 		[80, -98.5],
 		[78.5, -98.5],
@@ -351,7 +357,35 @@
 		[77.7, -84.72],
 		[79.06, -71.54],
 		[77.95,-81.2],
-		[78.5,-57.1289]
+		[78.5,-57.1289],
+		[79.1403021,-68.02734],
+		[77.881638,-59.4140625],
+		[77.881638,-55.3710937],
+		[74,-98.5],
+		[68.5,-98.5],
+		[59,-98.5],
+		[49.5,-98.5],
+		[50.67,-95.2],
+		[41.96,-95.2],
+		[31,-98.5],
+		[39.5,-95.2],
+		[29.7,-95.2],
+		[68.5,-82.6],
+		[68.5,-56.42],
+		[70,-84.9],
+		[70,-80.85],
+		[67.27,-71.54],
+		[67.27,-71.54],
+		[70,-59],
+		[70,-55],
+		[67.27,-68.2],
+		[78.5,-40.5],
+		[74.5,-40.5],
+		[68.5, -40.5],
+		[77.5,-3.5],
+		[59,-70],
+		[59,-40.5]
+
 	];
 
 	var result = {};
@@ -360,6 +394,50 @@
 	
 	var path = []
 	ans.forEach((value, i)=> path[i]=values[keys.indexOf(value)])
+
+	console.log(path);
+	for (let i = 0; i < path.length-1; i++) {
+		if(path[i][0]!=path[i+1][0] && path[i][1]!=path[i+1][1]){
+			console.log(path[i]);
+		}
+		if(xRooms.indexOf(keys[values.indexOf(path[i])])!=-1){
+			let temp = path[i];
+			let temp2 = path[i+1];
+			path.splice(i+1,0,[temp2[0],temp[1]]);
+		}
+		if(xRooms.indexOf(keys[values.indexOf(path[i+1])])!=-1){
+			let temp = path[i];
+			let temp2 = path[i+1];
+			path.splice(i+1,0,[temp[0],temp2[1]]);
+			i++;
+		}
+		if(yRooms.indexOf(keys[values.indexOf(path[i])])!=-1){
+			let temp = path[i];
+			let temp2 = path[i+1];
+			path.splice(i+1,0,[temp[0],temp2[1]]);
+
+		}	
+		if(yRooms.indexOf(keys[values.indexOf(path[i+1])])!=-1){
+			let temp = path[i];
+			let temp2 = path[i+1];
+			path.splice(i+1,0,[temp2[0],temp[1]]);
+			i++;
+		}
+	}
+	for(let i = 0; i<path.length-2;i++){
+		if(path[i][1]>path[i+1][1] && path[i+2][1]>path[i+1][1]){
+			path.splice(i+1,1);
+		}
+		if(path[i][1]<path[i+1][1] && path[i+2][1]<path[i+1][1]){
+			path.splice(i+1,1);
+		}
+		if(path[i][0]>path[i+1][0] && path[i+2][0]>path[i+1][0]){
+			path.splice(i+1,1);
+		}
+		if(path[i][0]<path[i+1][0] && path[i+2][0]<path[i+1][0]){
+			path.splice(i+1,1);
+		}
+	}
 
 	const initialView = [0,75];
 	function createMap(container) {
@@ -465,7 +543,7 @@
 	}
 	
 	function createLines() {
-		return L.polyline(path, { color: 'black', opacity: 0.8});
+		return L.polyline(path, { color: 'red', opacity: 1.0});
 	}
 
 	let markerLayers;
