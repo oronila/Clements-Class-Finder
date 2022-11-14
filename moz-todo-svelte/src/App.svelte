@@ -321,7 +321,7 @@
 
 
 
-	var ans = g.findPathWithDijkstra('1322','H16');
+	var ans = g.findPathWithDijkstra('1323','1325');
 	console.log(ans);
 
 
@@ -427,15 +427,19 @@
 	for(let i = 0; i<path.length-2;i++){
 		if(path[i][1]>path[i+1][1] && path[i+2][1]>path[i+1][1]){
 			path.splice(i+1,1);
+			i--;
 		}
 		if(path[i][1]<path[i+1][1] && path[i+2][1]<path[i+1][1]){
 			path.splice(i+1,1);
+			i--;
 		}
 		if(path[i][0]>path[i+1][0] && path[i+2][0]>path[i+1][0]){
 			path.splice(i+1,1);
+			i--;
 		}
 		if(path[i][0]<path[i+1][0] && path[i+2][0]<path[i+1][0]){
 			path.splice(i+1,1);
+			i--;
 		}
 	}
 
