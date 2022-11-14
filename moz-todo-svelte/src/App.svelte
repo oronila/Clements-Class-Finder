@@ -318,17 +318,14 @@
 	g.addEdge('2531','2529')
 
 
+<<<<<<< Updated upstream
 
 
 
+=======
+>>>>>>> Stashed changes
 	var ans = g.findPathWithDijkstra('1323','1325');
 	console.log(ans);
-
-
-
-
-
-
 
 
 	history.replaceState({"href_to_show":"/"}, "", "/")
@@ -443,7 +440,7 @@
 		}
 	}
 
-	const initialView = [0,75];
+	const initialView = [74,-75];
 	function createMap(container) {
 	  let m = L.map(container).setView(initialView, 10);
     	L.tileLayer(
