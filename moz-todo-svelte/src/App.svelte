@@ -318,7 +318,7 @@
 	g.addEdge('2531','2529')
 
 
-	var ans = g.findPathWithDijkstra('1327','1131');
+	var ans = g.findPathWithDijkstra('1327','1313');
 	console.log(ans);
 
 
@@ -335,6 +335,7 @@
 			window.location = "/";
 		}
 	}
+
 	//var route = g.findPathWithDijkstra('H1','1327')
 	var xRooms = ['1327','1325','1326','1324','1323','B1','1322','1320','1317','1315','1313','1311','1316',
 	'1312','1311', 'C3','1135','1133','1131','1136','1134','1132','1130'
@@ -435,6 +436,7 @@
 	ans.forEach((value, i)=> path[i]=values[keys.indexOf(value)])
 
 	console.log(path);
+	
 	for (let i = 0; i < path.length-1; i++) {
 		if(path[i][0]!=path[i+1][0] && path[i][1]!=path[i+1][1]){
 			console.log(path[i]);
@@ -481,7 +483,6 @@
 			i--;
 		}
 	}
-
 	const initialView = [74,-75];
 	function createMap(container) {
 	  let m = L.map(container).setView(initialView, 10);
