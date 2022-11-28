@@ -318,13 +318,9 @@
 	g.addEdge('2531','2529')
 
 
-<<<<<<< Updated upstream
+	var ans = g.findPathWithDijkstra('1323','1522');
 
-
-
-=======
->>>>>>> Stashed changes
-	var ans = g.findPathWithDijkstra('1323','1325');
+	
 	console.log(ans);
 
 
