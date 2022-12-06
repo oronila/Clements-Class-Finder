@@ -498,8 +498,11 @@
 		}
 	}
 	const initialView = [74, -75];
+	var mapOptions = {
+		zoomControl: false
+	}
 	function createMap(container) {
-		let m = L.map(container).setView(initialView, 10);
+		let m = L.map(container, mapOptions).setView(initialView, 10);
 		L.tileLayer("images2/{z}/{x}/{y}.png", {
 			subdomains: "abcd",
 			tileSize: L.point(512, 512),
@@ -700,8 +703,8 @@
 <style>
 	.dropdown {
 		position: absolute;
-		top: 20%;
-		left: 1%;
+		top: 10%;
+		left: 2%;
 		display: inline-block;
 		border-radius: 25px;
 		z-index: 2;
