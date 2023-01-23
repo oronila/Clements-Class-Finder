@@ -16,10 +16,11 @@
 	//import * as Graph from './algorithm.js';
 	//import PriorityQueue from './algorithm.js';
 	let map;
-	let menuOpen = false;
 	let open = false;
+	let menuOpen = false;
 	let inputValue = "";
-	$: console.log(inputValue);
+	let room1 = "C1";
+	let room2 = "";
 	//let priorityQueue = new PriorityQueue();
 	//let g = new Graph(1000);
 	//var g = new graph(1000);
@@ -320,8 +321,9 @@
 	g.addEdge("2519", "2518", "2517");
 	g.addEdge("2531", "2529");
 
-	var ans = g.findPathWithDijkstra("1327", "1313");
+	var ans = g.findPathWithDijkstra("C1", "1313");
 	console.log(ans);
+	
 
 	history.replaceState({"href_to_show":"/"}, "", "/")
 
@@ -520,6 +522,8 @@
 
 	var result = {};
 	keys.forEach((key, i) => (result[key] = values[i]));
+	console.log(result);
+	
 
 	var path = [];
 	ans.forEach((value, i) => (path[i] = values[keys.indexOf(value)]));
@@ -567,6 +571,62 @@
 			path.splice(i + 1, 1);
 			i--;
 		}
+	}
+	let lineLayers;
+	function updateRoom(room) {
+		lineLayers.remove()
+		ans = g.findPathWithDijkstra(room, "1313");
+		path = [];
+		ans.forEach((value, i) => (path[i] = values[keys.indexOf(value)]));
+
+		console.log(path);
+
+		for (let i = 0; i < path.length - 1; i++) {
+			if (path[i][0] != path[i + 1][0] && path[i][1] != path[i + 1][1]) {
+				console.log(path[i]);
+			}
+			if (xRooms.indexOf(keys[values.indexOf(path[i])]) != -1) {
+				let temp = path[i];
+				let temp2 = path[i + 1];
+				path.splice(i + 1, 0, [temp2[0], temp[1]]);
+			}
+			if (xRooms.indexOf(keys[values.indexOf(path[i + 1])]) != -1) {
+				let temp = path[i];
+				let temp2 = path[i + 1];
+				path.splice(i + 1, 0, [temp[0], temp2[1]]);
+				i++;
+			}
+			if (yRooms.indexOf(keys[values.indexOf(path[i])]) != -1) {
+				let temp = path[i];
+				let temp2 = path[i + 1];
+				path.splice(i + 1, 0, [temp[0], temp2[1]]);
+			}
+			if (yRooms.indexOf(keys[values.indexOf(path[i + 1])]) != -1) {
+				let temp = path[i];
+				let temp2 = path[i + 1];
+				path.splice(i + 1, 0, [temp2[0], temp[1]]);
+				i++;
+			}
+		}
+		for (let i = 0; i < path.length - 2; i++) {
+			if (path[i][1] > path[i + 1][1] && path[i + 2][1] > path[i + 1][1]) {
+				path.splice(i + 1, 1);
+				i--;
+			}
+			if (path[i][1] < path[i + 1][1] && path[i + 2][1] < path[i + 1][1]) {
+				path.splice(i + 1, 1);
+				i--;
+			}
+			if (path[i][0] > path[i + 1][0] && path[i + 2][0] > path[i + 1][0]) {
+				path.splice(i + 1, 1);
+				i--;
+			}
+			if (path[i][0] < path[i + 1][0] && path[i + 2][0] < path[i + 1][0]) {
+				path.splice(i + 1, 1);
+				i--;
+			}
+		}
+		lineLayers = createLines();
 	}
 	const initialView = [74, -75];
 	var mapOptions = {
@@ -667,13 +727,13 @@
 
 		return marker;
 	}
-
+	
 	function createLines() {
 		return L.polyline(path, { color: "red", opacity: 1.0 });
 	}
 
 	let markerLayers;
-	let lineLayers;
+	
 	function mapAction(container) {
 		map = createMap(container);
 		toolbar.addTo(map);
@@ -756,19 +816,19 @@
 <section class="dropdown">
 	<Button on:click={() => (menuOpen = !menuOpen)} {menuOpen} />
 
-	<div id="myDropdown" class:show={menuOpen} class="dropdown-content">
-		<Input bind:inputValue on:input={handleInput} />
-		<!-- MENU -->
-		{#if filteredItems.length > 0}
-			{#each filteredItems as item}
-				<Link link={item} />
-			{/each}
-		{:else}
-			{#each menuItems as item}
-				<Link link={item} />
-			{/each}
-		{/if}
-	</div>
+		<div id="myDropdown" class:show={menuOpen} class="dropdown-content">		
+			<Input bind:inputValue on:input={handleInput} />		
+				  <!-- MENU -->
+				  {#if filteredItems.length > 0}
+					  {#each filteredItems as item}
+						  <button on:click={() => updateRoom(item)} >{item}</button>
+					  {/each}
+				  {:else}
+					  {#each menuItems as item}
+						  <button on:click={() => updateRoom(item)} >{item}</button>
+					  {/each}
+				  {/if}		
+			</div>	
 </section>
 
 <style>
