@@ -15,6 +15,7 @@
 
 	//import * as Graph from './algorithm.js';
 	//import PriorityQueue from './algorithm.js';
+	
 	let map;
 	let open = false;
 	let menuOpen = false;
@@ -485,7 +486,7 @@
 	]
 
 	var the23s = ['S9','Math Office','C18','H35','C19','C36','H36','H37','C20','C21','H39','H38','2327','2325','2326','2324',
-	'2323','2322','2320','2317','2316','2315','2314','2313','2312','2311'];
+	'2323','2322','2320','2317','2316','2315','2314','2313','2312','2311', 'C22','H62'];
 	var location23 = [
 		[80.5,259.5],
 		[78,257],
@@ -512,11 +513,26 @@
 		[65.67,289.86],
 		[68.8,301.8],
 		[65.74,292.85],
-		[68.73,305.15]
-
+		[68.73,305.15],
+		[57,319.5],
+		[57,294],
+		
 	]
-	var keys = the1315.concat(the11s).concat(the16s).concat(the18s).concat(the23s);
-	var values = locations1315.concat(locations11).concat(location16).concat(location18.concat(location23));
+
+
+	var the25s = ['2518','2517','2519','H61','H60','C35','H59','2529']
+	var location25 = [
+		[54,292.5],
+		[54,296],
+		[47,295.5],
+		[38.5,264.5],
+		[21.3,264.5],
+		[12.5,264.5]
+		[12.5,302],
+		[17.5,300.75]
+	]
+	var keys = the1315.concat(the11s).concat(the16s).concat(the18s).concat(the23s).concat(the25s);
+	var values = locations1315.concat(locations11).concat(location16).concat(location18.concat(location23).concat(location25));
 
 
 
