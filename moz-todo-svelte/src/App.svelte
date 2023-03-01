@@ -9,9 +9,9 @@
 	import MapToolbar from "./MapToolbar.svelte";
 	import MarkerPopup from "./MarkerPopup.svelte";
 	import * as markerIcons from "./markers.js";
-	import Link from "./Link.svelte";
 	import Button from "./Button.svelte";
 	import Input from "./Input.svelte";
+	import Input2 from './Input2.svelte';
 
 	//import * as Graph from './algorithm.js';
 	//import PriorityQueue from './algorithm.js';
@@ -20,7 +20,8 @@
 	let open = false;
 	let menuOpen = false;
 	let inputValue = "";
-	let room1 = "C1";
+	let inputValue2 = "";
+	let room1 = "";
 	let room2 = "";
 	//let priorityQueue = new PriorityQueue();
 	//let g = new Graph(1000);
@@ -589,9 +590,63 @@
 		}
 	}
 	let lineLayers;
-	function updateRoom(room) {
+	function updateRoom(r) {
 		lineLayers.remove()
-		ans = g.findPathWithDijkstra(room, "1313");
+		ans = g.findPathWithDijkstra(r, room2);
+		path = [];
+		ans.forEach((value, i) => (path[i] = values[keys.indexOf(value)]));
+
+		console.log(path);
+
+		for (let i = 0; i < path.length - 1; i++) {
+			if (path[i][0] != path[i + 1][0] && path[i][1] != path[i + 1][1]) {
+				console.log(path[i]);
+			}
+			if (xRooms.indexOf(keys[values.indexOf(path[i])]) != -1) {
+				let temp = path[i];
+				let temp2 = path[i + 1];
+				path.splice(i + 1, 0, [temp2[0], temp[1]]);
+			}
+			if (xRooms.indexOf(keys[values.indexOf(path[i + 1])]) != -1) {
+				let temp = path[i];
+				let temp2 = path[i + 1];
+				path.splice(i + 1, 0, [temp[0], temp2[1]]);
+				i++;
+			}
+			if (yRooms.indexOf(keys[values.indexOf(path[i])]) != -1) {
+				let temp = path[i];
+				let temp2 = path[i + 1];
+				path.splice(i + 1, 0, [temp[0], temp2[1]]);
+			}
+			if (yRooms.indexOf(keys[values.indexOf(path[i + 1])]) != -1) {
+				let temp = path[i];
+				let temp2 = path[i + 1];
+				path.splice(i + 1, 0, [temp2[0], temp[1]]);
+				i++;
+			}
+		}
+		for (let i = 0; i < path.length - 2; i++) {
+			if (path[i][1] > path[i + 1][1] && path[i + 2][1] > path[i + 1][1]) {
+				path.splice(i + 1, 1);
+				i--;
+			}
+			if (path[i][1] < path[i + 1][1] && path[i + 2][1] < path[i + 1][1]) {
+				path.splice(i + 1, 1);
+				i--;
+			}
+			if (path[i][0] > path[i + 1][0] && path[i + 2][0] > path[i + 1][0]) {
+				path.splice(i + 1, 1);
+				i--;
+			}
+			if (path[i][0] < path[i + 1][0] && path[i + 2][0] < path[i + 1][0]) {
+				path.splice(i + 1, 1);
+				i--;
+			}
+		}
+		lineLayers = createLines();
+	}function updateDestRoom(r) {
+		lineLayers.remove()
+		ans = g.findPathWithDijkstra(room1, r);
 		path = [];
 		ans.forEach((value, i) => (path[i] = values[keys.indexOf(value)]));
 
@@ -798,12 +853,19 @@
 	}
 
 	var menuItems = xRooms.concat(yRooms);
+	var menuItems2 = xRooms.concat(yRooms);
+
 	let filteredItems = [];
 	const handleInput = () => {
 		return (filteredItems = menuItems.filter((item) =>
 			item.toLowerCase().match(inputValue.toLowerCase())
 		));
 	};
+	
+	let filteredItems2 = [];
+	const handleInput2 = () => {
+		return filteredItems2 = menuItems2.filter(item2 => item2.toLowerCase().match(inputValue2.toLowerCase()));	
+	}
 </script>
 
 
@@ -832,7 +894,7 @@
 <section class="dropdown">
 	<Button on:click={() => (menuOpen = !menuOpen)} {menuOpen} />
 
-		<div id="myDropdown" class:show={menuOpen} class="dropdown-content">		
+		<div id="menu1" class:show={menuOpen} class="dropdown-content">		
 			<Input bind:inputValue on:input={handleInput} />		
 				  <!-- MENU -->
 				  {#if filteredItems.length > 0}
@@ -845,6 +907,19 @@
 					  {/each}
 				  {/if}		
 			</div>	
+			<div id="menu2" class:show={menuOpen} class="dropdown-content">		
+				<Input2 bind:inputValue2 on:input={handleInput2} />		
+					  <!-- MENU -->
+					  {#if filteredItems.length > 0}
+						  {#each filteredItems2 as item2}
+							  <button on:click={() => updateDestRoom(item2)} >{item2}</button>
+						  {/each}
+					  {:else}
+						  {#each menuItems2 as item2}
+							  <button on:click={() => updateDestRoom(item2)} >{item2}</button>
+						  {/each}
+					  {/if}		
+				</div>	
 </section>
 
 <style>
@@ -857,19 +932,19 @@
 		z-index: 2;
 	}
 
-	.dropdown-content {
-		display: none;
-		position: absolute;
-		background-color: #f6f6f6;
-		min-width: 230px;
-		border: 1px solid #ddd;
-		z-index: 2;
-		border-radius: 25px;
-	}
+	
+.dropdown-content {
+  display: none;
+  position: relative;
+  background-color: #f6f6f6;
+  min-width: 215px;
+  border: 1px solid #ddd;
+  z-index: 1;
+}
 
 	/* Show the dropdown menu */
 	.show {
-		display: block;
+		display: inline-block;
 	}
 	.map {
 		width: 100%;
