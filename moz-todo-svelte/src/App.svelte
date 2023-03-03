@@ -972,7 +972,7 @@
 <section class="dropdown">
 	<Button on:click={() => (menuOpen = !menuOpen)} {menuOpen} />
 
-		<div id="myDropdown" class:show={menuOpen} class="dropdown-content">		
+		<div id="menu1" class:show={menuOpen} class="dropdown-content">		
 			<Input bind:inputValue on:input={handleInput} />		
 				  <!-- MENU -->
 				  {#if filteredItems.length > 0}
@@ -1024,7 +1024,7 @@
 
 	/* Show the dropdown menu */
 	.show {
-		display: block;
+		display: inline-block;
 	}
 	.map {
 		width: 100%;
