@@ -21,8 +21,8 @@
 	let menuOpen = false;
 	let inputValue = "";
 	let inputValue2 = "";
-	let room1 = "";
-	let room2 = "";
+	let room1 = "1313";
+	let room2 = "1313";
 	//let priorityQueue = new PriorityQueue();
 	//let g = new Graph(1000);
 	//var g = new graph(1000);
@@ -323,7 +323,7 @@
 	g.addEdge("2519", "2518", "2517");
 	g.addEdge("2531", "2529");
 
-	var ans = g.findPathWithDijkstra("C1", "1313");
+	var ans = g.findPathWithDijkstra(room1, room2);
 	console.log(ans);
 	
 
@@ -615,6 +615,7 @@
 	}
 	let lineLayers;
 	function updateRoom(r) {
+		room1 = r;
 		lineLayers.remove()
 		ans = g.findPathWithDijkstra(r, room2);
 		path = [];
@@ -668,7 +669,9 @@
 			}
 		}
 		lineLayers = createLines();
-	}function updateDestRoom(r) {
+	}
+	function updateDestRoom(r) {
+		room2 = r;
 		lineLayers.remove()
 		ans = g.findPathWithDijkstra(room1, r);
 		path = [];
@@ -740,7 +743,7 @@
 		return m;
 	}
 
-	let eye = true;
+	let eye = false;
 	let lines = true;
 
 	let toolbar = L.control({ position: "topright" });
@@ -934,7 +937,7 @@
 			<div id="menu2" class:show={menuOpen} class="dropdown-content">		
 				<Input2 bind:inputValue2 on:input={handleInput2} />		
 					  <!-- MENU -->
-					  {#if filteredItems.length > 0}
+					  {#if filteredItems2.length > 0}
 						  {#each filteredItems2 as item2}
 							  <button on:click={() => updateDestRoom(item2)} >{item2}</button>
 						  {/each}
@@ -954,6 +957,8 @@
 		display: inline-block;
 		border-radius: 25px;
 		z-index: 2;
+		max-width: 20%;
+		max-height: 15%;
 	}
 
 	
@@ -961,7 +966,7 @@
   display: none;
   position: relative;
   background-color: #f6f6f6;
-  min-width: 215px;
+  width: 215px;
   border: 1px solid #ddd;
   z-index: 1;
 }

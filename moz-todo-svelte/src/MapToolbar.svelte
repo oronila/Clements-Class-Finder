@@ -1,7 +1,7 @@
 <script>
 	import { createEventDispatcher } from 'svelte';
 	const dispatch = createEventDispatcher();
-	let eye = true;
+	let eye = false;
 	function clickEye() {
 		eye = !eye;
 		dispatch('click-eye', eye);
