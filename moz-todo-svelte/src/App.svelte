@@ -9,9 +9,9 @@
 	import MapToolbar from "./MapToolbar.svelte";
 	import MarkerPopup from "./MarkerPopup.svelte";
 	import * as markerIcons from "./markers.js";
+	//import Link from "./Link.svelte";
 	import Button from "./Button.svelte";
 	import Input from "./Input.svelte";
-	import Input2 from './Input2.svelte';
 
 	//import * as Graph from './algorithm.js';
 	//import PriorityQueue from './algorithm.js';
@@ -20,9 +20,8 @@
 	let open = false;
 	let menuOpen = false;
 	let inputValue = "";
-	let inputValue2 = "";
-	let room1 = "1313";
-	let room2 = "1313";
+	let room1 = "C1";
+	let room2 = "";
 	//let priorityQueue = new PriorityQueue();
 	//let g = new Graph(1000);
 	//var g = new graph(1000);
@@ -522,42 +521,92 @@
 
 
 	var the25s = ['2518','2517','2519','H61','H60','C35','H59','2529','C34','H57','H58','2511','2510','2512','2513','2515','2514','2516','H56','C33','H54','2816',
-    'C32','2830','H53','2828','2826','2815','2814']
+    'C32','2830','H53','2828','2826','2815','2814','H52','2824','2822','H51','2812','2810','C31',
+	'C30','2803','2802','S8','H50', 'C29', 'S12','H55','H49','2010','2011','2012','2003','2001','2007','2008',
+	'2412','2413','2527','2525','2521','2520','2410','2420']//2820 find entrance
 	var location25 = [
-		[54,292.5],
-		[54,296],
-		[47,295.5],
-		[38.5,264.5],
-		[21.3,264.5],
-		[12.5,264.5],
-		[12.5,302],
-		[17.5,300.75],
-		[12.5,318],
-		[28.8,318],
-		[47.8,318],
-		[46.2,314.64],
-		[48.71,332.38],
-		[46.1,332.38],
-		[29.9,314.8],
-		[27.1,314.8],
-		[30.3,332.38],
-		[26.8,332.38],
-		[12.5,337],
-		[12.5,360],
-		[-4.9,360],
-		[2.7,355.6],
-		[-18,360],
+		[54,292.5],[54,296],[47,295.5],[38.5,264.5],[21.3,264.5],[12.5,264.5],[12.5,302], [17.5,300.75], [12.5,318], [28.8,318], [47.8,318], [46.2,314.64], [48.71,332.38], [46.1,332.38], [29.9,314.8], [27.1,314.8], [30.3,332.38], [26.8,332.38], [12.5,337], [12.5,360], [-4.9,360], [2.7,355.6], [-18,360],
 		[-17.6,352.44],
 		[-18,371],
 		[-21.6,363.34],
 		[-21.6,367],
 		[-13.7,374.23],
-		[-13.9,377.6]
-
+		[-13.9,377.6],
+		[-18,398.7],
+		[-21.6,397.25],
+		[-21.6,400.25],
+		[-18,420.12],
+		[-13.42,409.21],
+		[-13.76,423.11],
+		[-35.6,443],
+		[-18,443],
+		[-35.6,449.5],
+		[-30.75,445.42],
+		[-11,446.1],
+		[-41,447],
+		[-4.2,443],
+		[12.7,443],
+		[6.3,446.5],
+		[12.5,394],
+		[37.9,443],
+		[33.86,438.4],
+		[38.1,438.5],
+		[42.7,438.2],
+		[47.6,446],
+		[38.4,445.6],
+		[30,446],
+		[39.7,259.5],
+		[37,260],
+		[22.75,267.7],
+		[29.8,269],
+		[46.7,268],
+		[48.5,268],
+		[53.75,259.5],
+		[18.5,259.6],
 
 	]
-	var keys = the1315.concat(the11s).concat(the16s).concat(the18s).concat(the23s).concat(the25s);
-	var values = locations1315.concat(locations11).concat(location16).concat(location18.concat(location23).concat(location25));
+
+
+
+	var the22and21s = ['H63','2218','2216','2214','H40','2220','C26','H41','C23','S2','2136','Book Room','S3','H44','2122','2120','H42','2131',
+	'2132','2130','C23','C25','2125','2123','H45','C27','H46','H47','2102','2101','2103','2106','2107','C28','Science Workroom','H48','C24',
+	'H43','S10'];
+
+	var location2221 = [
+		[57,358],[59.5,339.4],[59.5,345.75],[59.5,348.75],[76.4,353.8],[77.3,347.5],[57,388],[70.8,388],[77.5,388],[78.6,388],[68.6,392.5],[65.6,383.3],[60.77,391.11],
+		[57,421.88],
+		[60,423.28],
+		[60,419.75],
+		[77.5,415.37],
+		[78.45,411.5],
+		[76.8,413.4],
+		[76.8,417.8],
+		[77.5,442.5],
+		[71,442.5],
+		[58,442.5],
+		[71.5,446],
+		[70.5,446],
+		[58,466],
+		[58,480.75],
+		[67.35,480.75],
+		[74.16,480.75],
+		[68.15,476.3],
+		[57.44,484.6],
+		[65.9,484.6],
+		[71.6,476.3],
+		[73.7,484.6],
+		[77.5,480.75],
+		[78,483.4],
+		[77.5,461],
+		[77.5,442.5],
+		[71,442.5],
+		[81,480.75]
+
+	];
+	var keys = the1315.concat(the11s).concat(the16s).concat(the18s).concat(the23s).concat(the25s).concat(the22and21s);
+	var values = locations1315.concat(locations11).concat(location16).concat(location18.concat(location23).concat(location25)).concat(location2221);
+
+
 
 
 
@@ -617,7 +666,7 @@
 	function updateRoom(r) {
 		room1 = r;
 		lineLayers.remove()
-		ans = g.findPathWithDijkstra(r, room2);
+		ans = g.findPathWithDijkstra(room, "1313");
 		path = [];
 		ans.forEach((value, i) => (path[i] = values[keys.indexOf(value)]));
 
@@ -880,19 +929,12 @@
 	}
 
 	var menuItems = xRooms.concat(yRooms);
-	var menuItems2 = xRooms.concat(yRooms);
-
 	let filteredItems = [];
 	const handleInput = () => {
 		return (filteredItems = menuItems.filter((item) =>
 			item.toLowerCase().match(inputValue.toLowerCase())
 		));
 	};
-	
-	let filteredItems2 = [];
-	const handleInput2 = () => {
-		return filteredItems2 = menuItems2.filter(item2 => item2.toLowerCase().match(inputValue2.toLowerCase()));	
-	}
 </script>
 
 
@@ -921,7 +963,7 @@
 <section class="dropdown">
 	<Button on:click={() => (menuOpen = !menuOpen)} {menuOpen} />
 
-		<div id="menu1" class:show={menuOpen} class="dropdown-content">		
+		<div id="myDropdown" class:show={menuOpen} class="dropdown-content">		
 			<Input bind:inputValue on:input={handleInput} />		
 				  <!-- MENU -->
 				  {#if filteredItems.length > 0}
@@ -973,7 +1015,7 @@
 
 	/* Show the dropdown menu */
 	.show {
-		display: inline-block;
+		display: block;
 	}
 	.map {
 		width: 100%;
