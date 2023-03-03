@@ -9,6 +9,7 @@
 	import MapToolbar from "./MapToolbar.svelte";
 	import MarkerPopup from "./MarkerPopup.svelte";
 	import * as markerIcons from "./markers.js";
+	//import Link from "./Link.svelte";
 	import Button from "./Button.svelte";
 	import Input from "./Input.svelte";
 	import Input2 from "./Input2.svelte";
@@ -971,7 +972,7 @@
 <section class="dropdown">
 	<Button on:click={() => (menuOpen = !menuOpen)} {menuOpen} />
 
-		<div id="menu1" class:show={menuOpen} class="dropdown-content">		
+		<div id="myDropdown" class:show={menuOpen} class="dropdown-content">		
 			<Input bind:inputValue on:input={handleInput} />		
 				  <!-- MENU -->
 				  {#if filteredItems.length > 0}
@@ -1023,7 +1024,7 @@
 
 	/* Show the dropdown menu */
 	.show {
-		display: inline-block;
+		display: block;
 	}
 	.map {
 		width: 100%;
